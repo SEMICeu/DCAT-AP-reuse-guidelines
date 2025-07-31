@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="color-scheme" content="light dark">
+    <title>How to create your DCAT-AP profile</title>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
+    <script class='remove'>
+        var respecConfig = {
+            specStatus: "base",
+            editors: [{
+                name: "SEMIC Team",
+                company: "European Commission",
+                companyURL: "https://joinup.ec.europa.eu/collection/semic-support-centre"
+            }],
+            edDraftURI: "https://github.com/SEMICeu/DCAT-AP-reuse-guidelines",
+            shortName: "dcat-ap-profile-guidelines",
+            publishDate: "2025-07-31",
+            subtitle: "A guide for creating new DCAT-AP profiles",
+            otherLinks: [{
+                key: "Repository",
+                data: [{
+                    value: "GitHub",
+                    href: "https://github.com/SEMICeu/DCAT-AP-reuse-guidelines"
+                },{
+                    value: "DCAT-AP 3.0.1",
+                    href: "https://semiceu.github.io/DCAT-AP/releases/3.0.1/"
+                }],
+            }],
+            localBiblio: {
+                "DCAT-AP": {
+                    title: "DCAT Application Profile for data portals in Europe",
+                    href: "https://semiceu.github.io/DCAT-AP/releases/3.0.1/",
+                    date: "2024"
+                },
+                "GeoDCAT-AP": {
+                    title: "GeoDCAT Application Profile for data portals in Europe",
+                    href: "https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/",
+                    date: "2024"
+                },
+                "DCAT-AP-HVD": {
+                    title: "DCAT-AP HVD Application Profile",
+                    href: "https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/",
+                    date: "2024"
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+    <section id='abstract'>
+        <p>
+            This document provides guidance for creating new DCAT-AP profiles. It outlines a structured approach to 
+            identify use cases, consider appropriate solutions, build consensus, and publish profiles that extend or 
+            specialize the DCAT Application Profile for data portals in Europe.
+        </p>
+    </section>
+
+    <section>
+        <h2>Introduction</h2>
+        
+        <p>
+            SEMIC uses <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/">DCAT-AP</a> as a 
+            master profile of DCAT, which means that all DCAT-AP profiles must comply with the 
+            <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#provider-requirements">requirements 
+            and restrictions imposed by DCAT-AP</a>, namely mandatory properties and 
+            <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#controlled-vocs">controlled 
+            vocabularies that must be used</a> with select properties. The process of creating a new DCAT-AP 
+            profile therefore starts from a minimal DCAT-AP profile, gradually extending it to cover the 
+            requirements driving the creation of a new profile.
+        </p>
+
+        <p>
+            In the first part of this guide, we cover the process of creating a new DCAT-AP profile in 4 steps. 
+            In the second part, we cover the most common problematic situations in more detail and suggest 
+            approaches to deal with them.
+        </p>
+
+        <section>
+            <h3>Target audience</h3>
+            <p>
+                This <em>how to guide</em> is intended for policy officers leading a project which is considering the 
+                (re)use of DCAT-AP and their team members tasked with implementing the (re)use. This Guide describes 
+                the high-level process to inform a policy officer on the work to be undertaken and support his decision making. 
+                For the implementers of the new DCAT-AP profile, the guide provides details on how to concretely approach 
+                this task while remaining compatible with the wider DCAT-AP ecosystem.
+            </p>
+            <p>
+                This guide is primarily intended for:
+            </p>
+            <ul>
+                <li><strong>Policy officers</strong> who need to create domain-specific or national extensions of DCAT-AP</li>
+                <li><strong>Profile developers</strong> who are responsible for the technical design and implementation of DCAT-AP profiles</li>
+                <li><strong>Implementers</strong> who need to understand the requirements and constraints when implementing DCAT-AP extensions</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Basic requirements for DCAT-AP compliance</h3>
+            <p>
+                A DCAT-AP compliant profile MUST ensure that all data described according to that profile is also 
+                compliant with DCAT-AP. This means the profile MUST adhere to the 
+                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#provider-requirements">provider requirements</a> 
+                specified in DCAT-AP, including all mandatory classes and properties.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Step 1 - Familiarise with DCAT-AP</h2>
+        
+        <p>
+            <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/">DCAT-AP 3</a> focuses on various aspects 
+            of dataset cataloguing such as basic dataset metadata, data services, dataset series, dataset versioning, 
+            geospatial aspects of datasets, relationships among datasets and agents, and more. These aspects are the ones 
+            collected from multiple domains and data catalogues. This does not mean that each data catalogue, and therefore 
+            each profile, needs to cover all these aspects. When creating a new DCAT-AP profile, we recommend starting with 
+            the minimal DCAT-AP compliance requirements, i.e., the mandatory classes and their mandatory properties for DCAT-AP, 
+            and therefore for every profile, identified in 
+            <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#provider-requirements">Provider requirements</a>.
+        </p>
+
+        <p>
+            A minimum DCAT-AP conformant catalogue contains:
+        </p>
+
+        <ol>
+            <li>
+                <strong><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Catalogue">Catalogue</a></strong>
+                <ol type="a">
+                    <li><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Catalogue.title">Title</a> 
+                        and <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Catalogue.description">description</a> 
+                        of the catalogue</li>
+                    <li><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Catalogue.publisher">Publisher</a> 
+                        of the catalogue and their <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Agent.name">name</a></li>
+                    <li>Links to <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Catalogue.dataset">datasets</a> 
+                        in the catalogue (if any)</li>
+                </ol>
+            </li>
+            <li>
+                <strong>For each <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Dataset</a> (if any)</strong>
+                <ol type="a">
+                    <li><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.title">Title</a> 
+                        and <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.description">description</a> 
+                        of the dataset</li>
+                    <li>Links to <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Catalogue.dataset">distributions</a> 
+                        of the dataset (if any)</li>
+                </ol>
+            </li>
+            <li>
+                <strong>For each <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Distribution">Distribution</a> 
+                of a dataset (if any)</strong>
+                <ol type="a">
+                    <li><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Catalogue.dataset">Access URL</a> 
+                        of the distribution</li>
+                </ol>
+            </li>
+            <li>
+                <strong>For each <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService">Data Service</a> (if any)</strong>
+                <ol type="a">
+                    <li><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService.title">Title</a> 
+                        of the data service</li>
+                    <li><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService.endpointURL">Endpoint URL</a> 
+                        of the data service</li>
+                </ol>
+            </li>
+        </ol>
+
+        <p>
+            Before proceeding further, the use cases driving the creation of the new DCAT-AP profile need to be identified.
+        </p>
+
+        <p>
+            Before creating a new DCAT-AP profile, it is essential to understand what DCAT-AP already provides. 
+            This step involves examining the existing specification to identify what can be reused and what might need extension.
+        </p>
+
+        <ol>
+            <li>
+                <strong>Review the DCAT-AP specification:</strong> Start by reading the 
+                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/">current DCAT-AP specification</a> 
+                to understand its scope, classes, properties, and constraints.
+            </li>
+            <li>
+                <strong>Examine existing profiles:</strong> Look at existing DCAT-AP profiles such as 
+                <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/">GeoDCAT-AP</a> and 
+                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/">DCAT-AP HVD</a> 
+                to understand how they extend DCAT-AP for specific domains.
+            </li>
+            <li>
+                <strong>Understand the reuse principles:</strong> Familiarise yourself with the 
+                <a href="https://semiceu.github.io/style-guide/1.0.0/clarification-on-reuse.html">SEMIC Style Guide on reuse</a> 
+                to understand the different ways to reuse existing elements.
+            </li>
+            <li>
+                <strong>Identify relevant vocabularies:</strong> Research external vocabularies and standards 
+                that might be relevant to your domain and could be reused in your profile.
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2 id="step-2">Step 2 - Consider your use cases and propose their resolution</h2>
+        
+        <p>
+            The next step involves collecting and analyzing use cases that are not adequately covered by DCAT-AP. 
+            Each use case should be clearly defined and analyzed to determine the appropriate solution approach.
+        </p>
+
+        <section>
+            <h3>Collecting use cases</h3>
+            <p>
+                Use cases should be formulated from the perspective of different stakeholders and clearly describe 
+                what functionality or information is needed. Examples of well-formed use cases include:
+            </p>
+            <ul>
+                <li>"As a data publisher, I want to indicate the spatial resolution of a dataset in meters."</li>
+                <li>"As a data consumer, I want to know the update frequency of a dataset."</li>
+                <li>"As a data publisher, I want to specify contact information for dataset inquiries."</li>
+                <li>"As a data consumer, I want to know the language of a Data Service."</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Standard resolution approaches</h3>
+            <p>
+                For each use case, determine which of the following standard situations applies:
+            </p>
+
+            <ol>
+                <li>
+                    <strong>The use case is covered by what DCAT-AP already provides, and no context specific adjustments are required</strong>
+                    <br><br>
+                    For example:
+                    <ul>
+                        <li><strong>Use case:</strong> "As a data publisher, I want to specify contact information for dataset inquiries."</li>
+                        <li><strong>Existing DCAT-AP solution:</strong> <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Dataset</a> 
+                            class connects through the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.contactpoint">contact point property</a> 
+                            to the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Kind">Kind</a> class. The 
+                            <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Kind">Kind</a> class has no further properties 
+                            specified in DCAT-AP. However, following the <a href="https://www.w3.org/TR/vcard-rdf/">vCard Ontology</a> 
+                            for representation of contact point information is prescribed.</li>
+                        <li><strong>Resolution:</strong> The contact point property and the Kind class will be reused as-is. 
+                            This includes their labels, definitions, usage notes and property cardinalities. Since DCAT-AP does not 
+                            prescribe specific properties to be used for contact point, in this 
+                            <a href="https://semiceu.github.io/style-guide/develop/clarification-on-reuse.html#sec:reuse-of-a-class-as-is">"reuse as-is"</a> 
+                            scenario, the same situation applies to the DCAT-AP profile. If specific properties for contact point would be 
+                            required, see the next case, where "context specific adjustments are required" to continue.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>The use case is covered by what DCAT-AP already provides, but context specific adjustments are required</strong>
+                    <br><br>
+                    For example, in Czechia, every distribution needs to have a licence. This is not required by DCAT-AP. 
+                    It is however an adjustment that tightens existing constrains. Specifically, the cardinality of 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Distribution.licence">Distribution licence</a> 
+                    in DCAT-AP is <code>0..1</code>, and in the new profile, it will be <code>1..1</code>. However, if the Czech 
+                    legislation mandated that there need to be multiple licences attached, meaning cardinality <code>1..*</code>, 
+                    this would not be compliant with DCAT-AP <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Distribution.licence">Distribution licence</a> 
+                    and another property would have to be used for this (in that case, skip to the next situations).
+                    <br><br>
+                    Generally speaking, these adjustments are possible, if they tighten existing constraints. It is not possible 
+                    to loosen them under any conditions, as the result would no longer be compliant with DCAT-AP. For example:
+                    <ul>
+                        <li><strong>Use case:</strong> "As a publisher, for an HVD dataset, I require applicable legislation to point to a specific legislation IRI."</li>
+                        <li><strong>DCAT-AP solution:</strong> A Dataset can point to <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">any applicable legislation</a> identified by an IRI.</li>
+                        <li><strong>Resolution:</strong> Restriction of an existing DCAT-AP property in the new profile, as in 
+                            <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset.applicablelegislation">DCAT-AP HVD Dataset applicable legislation</a>, 
+                            where a specific usage note is added, and the cardinality constraint is tightened from <code>0..*</code> to <code>1..*</code>, 
+                            which is a compliant change. It would also be possible to make the terminology more context specific, 
+                            e.g. rename the Dataset class to "HVD Dataset", which was not deemed necessary here.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>The need is not covered by DCAT-AP yet, but it is covered by W3C DCAT or another vocabulary or DCAT-AP profile</strong>
+                    <br><br>
+                    Then reuse that approach, given that it does not cause a semantic issue. For example:
+                    <ul>
+                        <li><strong>Use case:</strong> "As a data consumer, I want to know the language of a Data Service"</li>
+                        <li><a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService">DCAT-AP does not have a solution</a></li>
+                        <li>DCAT specifies the language property for the class <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_language">Catalogued Resource</a>, 
+                            this can be reused, as Data Service <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService">is a subclass of</a> 
+                            Catalogued Resource, so no semantic issue arises.</li>
+                        <li><strong>Resolution:</strong> Reuse property from DCAT in our new DCAT-AP application profile and link to the property 
+                            description in DCAT, as in <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#DataService.language">GeoDCAT-AP 3.0.0 Data Service language</a>.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>The need is not covered by any known or admissible vocabulary to be reused</strong>
+                    <br><br>
+                    Then an original approach needs to be developed, typically supported by a new vocabulary defining new classes and properties.
+                    <br><br>
+                    For example, in Czechia, the local copyright legislation requires a finer description of a 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Distribution.licence">Distribution licence</a> 
+                    than what is supported in DCAT-AP, where these are just IRIs with the optional 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#LicenceDocument.type">Licence types</a>. 
+                    Therefore, additional new properties based on the Czech legislation needed to be defined for 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#LicenceDocument">Licence document</a> 
+                    and added to DCAT-AP-CZ.
+                    <br><br>
+                    Another example:
+                    <ul>
+                        <li><strong>Use case:</strong> "As a data publisher, I want to annotate Data Service with their category."</li>
+                        <li>Since no appropriate property was found, we create our own in our own namespace, e.g. 
+                            <a href="http://data.europa.eu/930/serviceCategory">http://data.europa.eu/930/serviceCategory</a> 
+                            along with its label, definition and possible domain and range.</li>
+                        <li>Note that in this case, the property is used with a 
+                            <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory">code list</a> 
+                            that is already published as linked data, which is a prerequisite for code lists to be used with DCAT-AP profiles.</li>
+                        <li>Use it in the new DCAT-AP profile like 
+                            <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#DataService.servicecategory">GeoDCAT-AP 3.0.0 Service category</a>.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <strong>Less frequent, or more complex situations are discussed in a separate section: <em>Specific situations and how to deal with them</em></strong>
+                    <br><br>
+                    When in doubt about a use case resolution, you may <a href="https://github.com/SEMICeu/DCAT-AP/issues">reach out to the DCAT-AP community using GitHub</a>. 
+                    It may be that your use case is addressed by other DCAT-AP profiles or in other contexts known by the DCAT-AP community, 
+                    and thus that you can reuse their approach.
+                </li>
+            </ol>
+
+            <p>
+                When multiple profiles address the same use case, the DCAT-AP community may initiate a process for a cross-domain 
+                common DCAT-AP approach to streamline the different profile variations. For that to happen, the community needs 
+                to be aware of existing and emerging DCAT-AP profiles. We kindly request that newly created DCAT-AP profiles 
+                are announced as a <a href="https://github.com/SEMICeu/DCAT-AP/issues">DCAT-AP GitHub issue</a>.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Step 3 - Involve relevant stakeholders to build a consensus about the new profile</h2>
+        
+        <p>
+            When creating a new DCAT-AP profile, it is crucial to get all stakeholders affected by the profile to the 
+            table as early as possible in the profile development process or at least to make sure that they are 
+            undeniably given the opportunity to join the process. This is to avoid problems with non-acceptance of the 
+            developed profile by the stakeholders, or complaints by the stakeholders about not having the opportunity 
+            to influence the profile and therefore having problems implementing it later.
+        </p>
+
+        <p>
+            Furthermore, to avoid later discussions about opinions not considered etc., the process of consensus building 
+            needs to be transparent, accessible and traceable. This can be solved by utilising a public repository for 
+            the new profile, e.g. GitHub or a public GitLab instance.
+        </p>
+
+        <p>
+            Each use case from the previous step should be clearly identified e.g. as a GitHub issue. For an example, 
+            see e.g. <a href="https://github.com/SEMICeu/GeoDCAT-AP/issues/73">Issue #73 of GeoDCAT-AP</a>. Its description 
+            should contain a problem statement or requirement, and a proposed resolution, or its variants, based on the 
+            situations described in this document.
+        </p>
+
+        <p>
+            The new profile community should be asked to consider the use case and express agreement or disagreement, 
+            and possibly an alternative to the proposed resolution. A consensus about the resolution of the individual 
+            use cases should be reached, giving credibility to the resolutions and the new DCAT-AP profile.
+        </p>
+
+        <p>
+            If there is insufficient activity around the profile, or discussions about some use cases do not lead to a consensus, 
+            webinars with the profile community, where interested parties may discuss alternatives and vote on a resolution 
+            in a more interactive way, should be organised. For each webinar, a set of issues to be discussed should be 
+            identified and sent in advance with the invitation to that webinar. The reached resolutions then need to be 
+            recorded with the issues in the repository.
+        </p>
+
+        <p>
+            An example of such a process is the GeoDCAT-AP 3.0.0 revision, documented 
+            <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#meeting-minutes">in the specification</a>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Step 4 - Publish your new DCAT-AP profile</h2>
+        
+        <p>
+            It is important that the new DCAT-AP profile is published on the Web to avoid problems with its findability 
+            and accessibility. Artifacts of the profile such as the human readable documentation, RDFS vocabulary with 
+            definitions of new classes and properties, or SHACL shapes validating defined constraints should be published 
+            at publicly accessible URLs. As these URLs need to be as stable as possible not to break references in future, 
+            a conscious effort should be invested in their definition. See 
+            <a href="https://interoperable-europe.ec.europa.eu/collection/semic-support-centre/document/10-rules-persistent-uris">10 Rules for Persistent URIs</a> 
+            for inspiration. This may also include usage of Persistent URL services such as w3id.org. As a free web-hosting 
+            service, e.g. GitHub Pages can be used. The following steps should be taken:
+        </p>
+
+        <ol>
+            <li>
+                <strong>Publish the new DCAT-AP profile.</strong>
+                <ol type="a">
+                    <li>
+                        A human-readable, HTML-based specification of the application profile. As a specification authoring tool, 
+                        <a href="https://respec.org/docs/">Respec</a> or <a href="https://speced.github.io/bikeshed/">Bikeshed</a> 
+                        can be used. It should contain the profile usage context, explanation how the profile is distinct from DCAT-AP, 
+                        and contact information, e.g. a link to a GitHub repository, where feedback can be collected.
+                        <ul>
+                            <li>Example: GeoDCAT-AP 3.0.0 - hosted on GitHub Pages, authored in Respec, published at 
+                                <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/">https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/</a></li>
+                            <li>Example: DCAT-AP 3.0 - hosted on GitHub Pages, authored in Respec, published at 
+                                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/">https://semiceu.github.io/DCAT-AP/releases/3.0.1/</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        A machine-actionable set of validation rules using <a href="https://www.w3.org/TR/shacl/">SHACL</a> shapes.
+                        <ul>
+                            <li>Example: <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#validation-of-dcat-ap">DCAT-AP 3.0 SHACL shapes</a>.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+
+            <li>
+                <strong>If new classes and properties were created, publish the newly created vocabulary.</strong>
+                <ol type="a">
+                    <li>
+                        A separate human-readable document describing the newly created classes and properties. As a specification 
+                        authoring tool, <a href="https://respec.org/docs/">Respec</a> or <a href="https://speced.github.io/bikeshed/">Bikeshed</a> 
+                        can be used. It should contain a link to the profile it supports, and contact information, e.g. a link to a 
+                        GitHub repository, where feedback can be collected.
+                        <ul>
+                            <li>Example: GeoDCAT-AP vocabulary, the 930 namespace, published at 
+                                <a href="https://semiceu.github.io/GeoDCAT-AP/930/releases/3.0.0/">https://semiceu.github.io/GeoDCAT-AP/930/releases/3.0.0/</a>, 
+                                dereferenceable through <a href="http://data.europa.eu/930/">http://data.europa.eu/930/</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        RDF Schema (or OWL) based definitions of the newly created classes and properties as an RDF file.
+                        <ul>
+                            <li>Example: GeoDCAT-AP vocabulary, the 930 namespace, published at 
+                                <a href="https://semiceu.github.io/GeoDCAT-AP/930/releases/3.0.0/voc/930.ttl">https://semiceu.github.io/GeoDCAT-AP/930/releases/3.0.0/voc/930.ttl</a>, 
+                                dereferenceable from IRIs of individual classes and properties, e.g. 
+                                <a href="http://data.europa.eu/930/distributor">http://data.europa.eu/930/distributor</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+
+        <p>
+            The SEMIC team can always be contacted for publication advice (tooling, modelling advice, publishing advice).
+        </p>
+
+        <p>
+            Making the profile publicly accessible serves not only the intended audience, but also the broader community, 
+            increasing cross fertilisation, i.e. avoiding situations where various profiles address similar use cases in 
+            different ways, making them less interoperable, and the overall profile ecosystem more complex.
+        </p>
+    </section>
+
+    <section>
+        <h2>Specific situations and how to deal with them</h2>
+        
+        <p>
+            In this part of the guide, we focus on less frequent and more complex situations that can be encountered when 
+            creating a new DCAT-AP profile that are not covered by the standard ones described above. When in doubt about 
+            a use case resolution, you may reach out to the DCAT-AP community using GitHub. It may be that your use case 
+            is addressed by other DCAT-AP profiles or in other contexts known by the DCAT-AP community, and thus that you 
+            can reuse their approach.
+        </p>
+
+        <section>
+            <h3>Situation 1. Expectations on Linked Data, Dereferenceability and URI behaviour</h3>
+            
+            <section>
+                <h4>Problem sketch</h4>
+                <p>
+                    DCAT-AP is a Semantic Web data specification. Despite that the specification does not enforce the data 
+                    exchange in implementation to be in native Linked Data formats (RDF serialisations), this is implicitly 
+                    expected by many editors or contributors.
+                </p>
+                <p>
+                    Therefore, the profile should not block the implementation as Linked Data exchange. Consult also the 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#identifiers">section on identifiers in DCAT-AP</a>.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <ol>
+                    <li>
+                        The DCAT-AP profile is a semantic web data specification:
+                        <ol type="a">
+                            <li>All new properties should be defined according to the Linked Data principles of persistent URIs.</li>
+                            <li>The profile specification should be a web enabled html specification</li>
+                        </ol>
+                    </li>
+                    <li>
+                        The DCAT-AP profile data exchange may be done as Linked Data.
+                        <ol type="a">
+                            <li>All instances of the mentioned classes may have a URI as identifier. Ensure that this URI is not 
+                                conflicting with the use of any identifier property (e.g. <code>dct:identifier</code>, <code>adms:identifier</code>).</li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <p>Persistent URIs are</p>
+                <ul>
+                    <li>
+                        Dereferenceable with a minimum content negotiation implemented:
+                        <ul>
+                            <li>If the Accept Header is html then return the human oriented html representation</li>
+                            <li>If the Accept Header is a RDF serialisation then return the corresponding RDF representation</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    Not following these standards will cause systems that rely on them to not be able to process your data. 
+                    If dereferenceability is not in place systems and users will not be able to understand new elements nor 
+                    understand how they are to be used. Elements which are not dereferenceable in the best case are disregarded 
+                    or in the worst case the entire dataset might be thrown out. By not meeting the expectations a new barrier 
+                    to interoperability is created undoing the efforts made on the reuse of DCAT-AP.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Situation 2. Existing DCAT-AP property/class does not semantically fit the use case</h3>
+            
+            <section>
+                <h4>Problem</h4>
+                <p>
+                    For a given use case, there is a property/class in DCAT-AP that seems appropriate at first glance, 
+                    e.g. based on its IRI or label, etc. However, upon closer examination, application of the property/class 
+                    does not fit exactly its definition or usage note in DCAT-AP.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <ol>
+                    <li>
+                        If the description seems formulated vaguely in DCAT-AP, and a more fitting description is required, 
+                        that does not contradict the DCAT-AP formulations and only makes them more specific to the context 
+                        of the new profile, then reuse is still possible.
+                        <ol type="a">
+                            <li>
+                                If the changes are simply terminological, but otherwise it is OK to treat the property/class as it is 
+                                defined in DCAT-AP, the more precise labels can be applied to the HTML documentation. For more information, 
+                                see the <a href="https://semiceu.github.io/style-guide/1.0.0/clarification-on-reuse.html#sec:reuse-of-a-class-with-terminological-adaptations">SEMIC Style Guide</a>.
+                                <ul>
+                                    <li>Example: DCAT-AP has <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">"applicable legislation"</a> 
+                                        property, but in the new profile, the authors would like to call it "directives", as this label better fits their context. 
+                                        Other than that, the values are "The legislation that mandates the creation or management of the Dataset." as stated in the definition. 
+                                        It is fine if outside of the profile context, the values are labelled as "applicable legislation".</li>
+                                </ul>
+                            </li>
+                            <li>
+                                If the changes are more substantial, and there is need to differentiate between the profile class/property 
+                                and other DCAT-AP usages of the class/property, then a subclass or subproperty needs to be created in a new 
+                                vocabulary and used in the profile. For more information, see the 
+                                <a href="https://semiceu.github.io/style-guide/1.0.0/clarification-on-reuse.html#sec:reuse-of-a-class-with-semantic-adaptations">SEMIC Style Guide</a>.
+                                <ul>
+                                    <li>Example: DCAT-AP has <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">"applicable legislation"</a> 
+                                        property, but in the new profile, it is important to distinguish "applicable internal legislation" and "applicable national legislation". 
+                                        It is fine if both are interpreted as "applicable legislation" outside of the profile context, but in the profile, 
+                                        each must be validated separately, as the distinction is significant.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        If the required description has significant differences, and interpretation of the data using only the DCAT-AP description 
+                        does not fit, then the class/property cannot be reused, as it would cause confusion with DCAT-AP users. A new class/property 
+                        needs to be defined and used.
+                        <ol type="a">
+                            <li>Example: DCAT-AP has <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">"applicable legislation"</a> 
+                                property. In the new profile, the authors want to represent a relation between a Dataset and internal legislation, 
+                                in which the dataset is referred to. In this case, the property cannot be reused, because the definition says 
+                                "The legislation that mandates the creation or management of the Dataset.", not legislation mentioning the dataset. 
+                                Therefore, the reuse of the property in this context would be confusing from DCAT-AP point of view.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    When reusing existing classes and properties, profile authors must make sure that the labels, definitions and 
+                    usage notes in DCAT-AP still capture the meaning of the data, even if in a more abstract way, and that there 
+                    are no semantic differences or contradictions. This is because the users outside of the profile context will 
+                    interpret the data using the DCAT-AP interpretation, which must not be confusing.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Situation 3 – Controlled vocabulary attached to a DCAT-AP property does not exactly fit</h3>
+            
+            <section>
+                <h4>Problem sketch</h4>
+                <p>
+                    A reused DCAT-AP property for a certain class fits a use case of the new profile. However, there is a 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#controlled-vocs">controlled vocabulary attached</a> 
+                    to the property for this class in DCAT-AP, and it is not fit for purpose.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <p>
+                    Various scenarios need to be considered based on the type of constraint and requirement:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Some items that are required in the profile are missing in the controlled vocabulary</strong>
+                        <ul>
+                            <li><strong>Solution 1:</strong> Try to extend the existing controlled vocabulary at its source. Many of the specified 
+                                controlled vocabularies are managed in <a href="https://op.europa.eu/en/web/eu-vocabularies/controlled-vocabularies">EU Vocabularies</a>, 
+                                and there is a possibility to submit additional items in them. Similarly, this may be possible with other controlled vocabulary publishers.
+                                <ul>
+                                    <li>Example: For GeoDCAT-AP 3.0.0, <code>AS_NEEDED</code> and <code>NOT_PLANNED</code> items were added to the 
+                                        <a href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/frequency">Frequency controlled vocabulary</a> 
+                                        that MUST be used with <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.frequency">Dataset frequency</a>.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Solution 2:</strong> If the above solution is not feasible, create a separate controlled vocabulary, 
+                                and decide based on the constraints on the controlled vocabulary usage on the considered property.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>A different controlled vocabulary is to be used</strong>
+                        <ul>
+                            <li>If another controlled vocabulary is to be used, then it must be used with a different property.
+                                <ul>
+                                    <li>Example: For GeoDCAT-AP 3.0.0, the <a href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory">Classification of spatial data services</a> 
+                                        and <a href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType">Spatial data service type</a> 
+                                        controlled vocabularies are used to classify <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#DataService.servicecategory">Data Services</a>. 
+                                        New properties, <a href="http://data.europa.eu/930/serviceCategory">http://data.europa.eu/930/serviceCategory</a> 
+                                        and <a href="http://data.europa.eu/930/serviceType">http://data.europa.eu/930/serviceType</a>, with the respective 
+                                        controlled vocabularies attached were created instead of reusing the 
+                                        <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_type">Catalogued Resource type</a> both, 
+                                        as that would make validation and processing of the data more complex.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    In DCAT-AP, the expectations of <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#controlled-vocs">controlled vocabularies that MUST be used</a> 
+                    with listed properties of specified classes are that if the property is to be used with that class, even in DCAT-AP profile, 
+                    it is to be used with the DCAT-AP indicated controlled vocabulary. This applies unless otherwise specified in a usage note, 
+                    e.g. in the case of the property <code>dct:publisher</code> and the 
+                    <a href="http://publications.europa.eu/resource/authority/continent/">EU Vocabularies Corporate bodies Named Authority List</a>.
+                </p>
+                <p>
+                    When, for a certain property used with a class, values from a controlled vocabulary MAY be used or ARE RECOMMENDED to be used, 
+                    alternative controlled vocabularies are allowed or tolerated instead of values from the original one. When the property MUST 
+                    have at least one value from a controlled vocabulary, values from other controlled vocabularies are allowed only in addition 
+                    to the specified one.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Situation 4. An existing DCAT-AP property description fits the addressed use case, but its range does not</h3>
+            
+            <section>
+                <h4>Problem sketch</h4>
+                <p>
+                    An existing DCAT-AP property fits the use case of the new profile we want to address. However, a different range is required.
+                </p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li><strong>Use case:</strong> "As a data publisher, I want to represent the spatial resolution of a Dataset in arbitrary units of measurement."</li>
+                    <li><strong>DCAT-AP situation:</strong> there is a property <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.spatialresolution">Dataset spatial resolution</a> 
+                        labelled "spatial resolution", with the definition "The minimum spatial separation resolvable in a dataset, measured in meters." 
+                        and the range of <code>xsd:decimal</code>.</li>
+                    <li><strong>Problem:</strong> I want to be able to use arbitrary units of measurement, not just meters. This means that the range 
+                        would be a class instead of a literal representing the number of meters.</li>
+                    <li><strong>Solution:</strong> A different property needs to be used, as reuse of the original property in this case would not be 
+                        compatible with DCAT-AP. See the <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.1/#spatial-resolution-spatial-resolution-of-the-dataset">GeoDCAT-AP 3.0 section on the three different ways of representing spatial resolution</a>.</li>
+                </ul>
+                <p>
+                    There can be several types of range incompatibilities, and what can or cannot be done in each case depends on the exact 
+                    nature of the incompatibility resulting from the combination of expected range types and the ones defined in DCAT-AP.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <ol>
+                    <li>
+                        <strong>The range in DCAT-AP is a class, the profile requires a literal datatype</strong>
+                        <ol type="a">
+                            <li>Reuse not possible. Another property needs to be used.
+                                <ul>
+                                    <li>Example: In DCAT-AP we have a property <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.contactpoint">Dataset contact point</a> 
+                                        with the class <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Kind">vcard:Kind</a> as range. 
+                                        The profile requires the value of contact point to be text, such as "telephone: +420111222333, fax: 55448889". 
+                                        This is not possible; another property needs to be used.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>The range in DCAT-AP is a literal datatype, the profile requires a class</strong>
+                        <ol type="a">
+                            <li>Reuse not possible. Another property needs to be used.
+                                <ul>
+                                    <li>Example: the introductory example above.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>The range in DCAT-AP is a literal datatype, the profile requires another literal datatype</strong>
+                        <ol type="a">
+                            <li>Reuse possible, if the profile datatype is a subtype of the DCAT-AP one.
+                                <ul>
+                                    <li>Example: <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.releasedate">DCAT-AP Dataset Release Date</a> 
+                                        is a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#TemporalLiteral">Temporal Literal</a>, 
+                                        which means that <code>xsd:gYear</code>, <code>xsd:gYearMonth</code>, <code>xsd:date</code> or <code>xsd:dateTime</code> is allowed.</li>
+                                    <li>A profile may require that only <code>xsd:date</code> is used, which is OK.</li>
+                                    <li>Another profile may require that also <code>xsd:gDay</code> can be used. This is, however, not possible, 
+                                        as that datatype is not expected by existing DCAT-AP implementations.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>The range in DCAT-AP is a class, the profile requires controlled vocabulary usage</strong>
+                        <ol type="a">
+                            <li>This means a selection from specific instances of the DCAT-AP indicated class, listed in a controlled vocabulary. This is OK.
+                                <ul>
+                                    <li>Example: in DCAT-AP, we have a property <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.contactpoint">Dataset contact point</a> 
+                                        with the class <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Kind">vcard:Kind</a> as range, 
+                                        meaning any resource can be used. The profile has a controlled vocabulary of predefined contact points to be used. This is OK.</li>
+                                    <li>Example: in DCAT-AP, <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.conformsto">dcterms:conformsTo</a> 
+                                        is used to indicate <em>An implementing rule or other specification.</em> of a dataset. This can be any standard. 
+                                        The profile is domain-specific, where only a limited set of standards is admissible. This set will be represented 
+                                        as a profile-specific controlled vocabulary, which is OK.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>The range in DCAT-AP is one class, the profile requires another class</strong>
+                        <ol type="a">
+                            <li>If the classes are semantically compatible, then it is OK. For interoperability purposes, it might be good to 
+                                double type the resources so that even applications not supporting inference are able to process the data according to DCAT-AP.
+                                <ul>
+                                    <li>Example: DCAT-AP has <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.applicablelegislation">"applicable legislation"</a> 
+                                        property, with range <code>eli:LegalResource</code>. In a profile, instances of another class, <code>skos:Concept</code> 
+                                        are used as values of the property. The effect is that the instances will be treated also as instances of 
+                                        <code>eli:LegalResource</code> in DCAT-AP implementations.</li>
+                                    <li>If the definition of <code>eli:LegalResource</code> "This class represents the legislation, policy or policies that lie behind the Rules that govern the service." 
+                                        does not conflict with the instances of <code>skos:Concept</code> used in the profile, this is OK.</li>
+                                    <li>However, if some of the instances used do not fit the definition of <code>eli:LegalResource</code>, 
+                                        then this is not compliant with DCAT-AP.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    Existing DCAT-AP implementations expect value types (datatype, class instance, controlled vocabulary) specified for 
+                    existing DCAT-AP properties. Narrowing down the value space will not create any issues but extending it will.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Situation 5. You want to add a new property, to which class it should be assigned?</h3>
+            
+            <section>
+                <h4>Problem sketch</h4>
+                <p>
+                    When the use case resolution requires definition of a new property, its domain and range should be defined as well. 
+                    If this property is to be used in multiple contexts, the question is, what should be its range.
+                </p>
+                <p>
+                    DCAT-AP applies the guideline to use properties at their most concrete usage context. For example, the 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">applicable legislation of a Dataset</a> 
+                    is used at the level of a Dataset with the definition "The legislation that mandates the creation or management of the Dataset.". 
+                    Then, it is used <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService.applicablelegislation">again, at the level of a Data Service</a>, 
+                    as "The legislation that mandates the creation or management of the Data Service.", reflecting the specifics of the context 
+                    given by the class on which it is used. However, both usages are of the same property <code>r5r:applicableLegislation</code>. 
+                    This property is defined separately, in the <a href="https://semiceu.github.io/DCAT-AP/r5r/releases/3.0.0/#applicableLegislation">DCAT-AP Vocabulary</a>, 
+                    with the more generic definition "the legislation that is applicable to this resource." and the generic domain <code>rdfs:Resource</code>. 
+                    This is done so that the property itself is reusable in multiple contexts. Then, its reuse can be further described in the 
+                    specific context such as Dataset or Data Service.
+                </p>
+                <p>
+                    Another example can be seen in <a href="https://github.com/SEMICeu/DCAT-AP/issues/384">DCAT-AP Issue #384</a> for the property 
+                    spatial resolution, where one property is used in three different contexts, differently each time.
+                </p>
+                <p>
+                    The same principle is suggested for properties define in DCAT-AP profiles, i.e. a reusable definition of the property in a vocabulary, 
+                    and then description of its context-specific usage in the profile documentation.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <ol>
+                    <li>Define the new property in a supporting vocabulary. This consists of
+                        <ol type="a">
+                            <li>A URI for the property</li>
+                            <li>A generic label that fits all usage contexts</li>
+                            <li>A generic definition that fits all usage contexts</li>
+                            <li>A generic domain and range</li>
+                        </ol>
+                    </li>
+                    <li>(where necessary) Improve the usage notes of the reused DCAT-AP classes to provide the readers with an as much precise context 
+                        to understand the difference between an instance for a class in DCAT-AP and an instance of the corresponding class in the new DCAT-AP profile.
+                        <ol type="a">
+                            <li>Example: There is distinction between a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Dataset in DCAT-AP</a> 
+                                and a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset">Dataset in the context of DCAT-AP HVD</a>. 
+                                Datasets described in DCAT-AP do not have the requirement to fulfil the HVD IR, while Datasets in DCAT-AP HVD are fulfilling it. 
+                                See the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#scope">DCAT-AP HVD Scope definition</a> addressing this.</li>
+                        </ol>
+                    </li>
+                    <li>If there are multiple separate contexts of the same reused class e.g. as with the Distributions example above, create a subclass 
+                        of the corresponding DCAT-AP class for each of the contexts. Apply the same publication rules as for new properties (as in situation 5) 
+                        and introduce the new class in the supporting vocabulary.</li>
+                    <li>If the usage contexts supersede one class, creating an additional, separate sub-profile for the context is preferred, 
+                        containing all the affected classes and properties in that context.
+                        <ol type="a">
+                            <li>Example: <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/">DCAT-AP HVD</a> defines a specific usage context 
+                                spanning Datasets, Data Services and Distributions. That is why it is a separate profile (annex) of DCAT-AP.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    Each profile must express its motivation to exist. That scope reflects into the usage scoping of the classes. 
+                    When a profile combines multiple usage scopes in one document, profile editors must either generalise the usage 
+                    scopes to fit all cases, either create subclasses or sub profiles to document the requirements for each usage scope.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Situation 6. DCAT-AP property fits a use case, except for its cardinality</h3>
+            
+            <section>
+                <h4>Problem sketch</h4>
+                <p>
+                    A DCAT-AP property has a cardinality different than required by the new profile.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <ol>
+                    <li>
+                        <strong>DCAT-AP is more restrictive than required</strong>
+                        <ol type="a">
+                            <li>
+                                In DCAT-AP, the property is mandatory (<code>1..1</code>, <code>1..*</code>)
+                                <ol>
+                                    <li>Then it must be mandatory in the profile as well.</li>
+                                    <li>Example: <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Agent">Agent must have a name</a> in DCAT-AP.</li>
+                                </ol>
+                            </li>
+                            <li>
+                                In DCAT-AP, the property can have at most one value (<code>1..1</code>, <code>0..1</code>)
+                                <ol>
+                                    <li>Then in the profile, the property also must have at most one value.</li>
+                                    <li>If there is a good case to change this on DCAT-AP level, <a href="https://github.com/SEMICeu/DCAT-AP/issues">raise an issue</a>.
+                                        <ul>
+                                            <li>Example: For GeoDCAT-AP, Catalogue (Distribution) <a href="https://github.com/SEMICeu/DCAT-AP/issues/370">rights cardinality needs to be relaxed</a> 
+                                                from <code>0..1</code> to <code>0..*</code>, which was escalated as a DCAT-AP issue.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>DCAT-AP is less restrictive than required</strong>
+                        <ol type="a">
+                            <li>No action required, a profile can be more restrictive than DCAT-AP.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    Existing DCAT-AP implementations expect values for mandatory properties and treat properties with number of values 
+                    limited to 1 as such. Applications might implement simple values as simple attributes, not expect arrays in code. 
+                    SPARQL queries may not aggregate over variables which are expected to have at most one value or may expect values for 
+                    mandatory properties. These may break if the constraints are violated.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Situation 7. You want to reuse a DCAT-AP class but need to change the existing usage scope or definitions</h3>
+            
+            <section>
+                <h4>Problem sketch</h4>
+                <p>
+                    A new DCAT-AP profile describes the use of DCAT-AP in a new usage context. The generic DCAT-AP descriptions for the 
+                    classes, such as Catalogue, Dataset, Distribution, ... may need to be contextualised for the profile to be supportive 
+                    for the profile audience.
+                </p>
+                <p>
+                    Example: In the new profile context, the audience calls Data Interface what in DCAT-AP is called a Distribution. 
+                    In the new profile, the class <code>dcat:Distribution</code> will therefore have the Data Interface label, 
+                    which will be used throughout the profile document.
+                </p>
+                <p>
+                    Another related challenge may occur influencing the classes' usage notes or definitions. The profile's usage 
+                    context applies to the whole document. It, however, may happen that the profile combines several distinct usage contexts together.
+                </p>
+                <p>
+                    Example: I want to have a different set of mandatory properties for Distribution when it represents a downloadable file, 
+                    and a different set of mandatory properties for Distribution when it represents a data service. Then in the usage notes 
+                    of all properties, I need to repeat sentences like "If the Distribution represents a Data Service, this is mandatory. 
+                    If the Distribution represents a downloadable file, this is not mandatory."
+                </p>
+                <p>
+                    Without taking any measures, integrating distinct usage contexts into one class leads to more complex and longer usage 
+                    descriptions. And, therefore, increasing the risk for misinterpretations.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <ol>
+                    <li>
+                        Describe the usage context in the introductory sections of the DCAT-AP profile. A profile without a well 
+                        circumscribed context is subject to the existential question: what does this profile address differently than DCAT-AP?
+                        <ol type="a">
+                            <li>Example 1: State "This profile describes Datasets coming from the Zoological domain." – then it is clear that what 
+                                is written in this profile does not apply elsewhere.</li>
+                            <li>Example 2: See the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#context">DCAT-AP HVD Context</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        (where necessary) Improve the usage notes of the reused DCAT-AP classes to provide the readers with an as much precise context 
+                        to understand the difference between an instance for a class in DCAT-AP and an instance of the corresponding class in the new DCAT-AP profile.
+                        <ol type="a">
+                            <li>Example: There is distinction between a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Dataset in DCAT-AP</a> 
+                                and a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset">Dataset in the context of DCAT-AP HVD</a>. 
+                                Datasets described in DCAT-AP do not have the requirement to fulfil the HVD IR, while Datasets in DCAT-AP HVD are fulfilling it. 
+                                See the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#scope">DCAT-AP HVD Scope definition</a> addressing this.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        If there are multiple separate contexts of the same reused class e.g. as with the Distributions example above, create a subclass 
+                        of the corresponding DCAT-AP class for each of the contexts. Apply the same publication rules as for new properties (as in situation 5) 
+                        and introduce the new class in the supporting vocabulary.
+                    </li>
+                    <li>
+                        If the usage contexts supersede one class, creating an additional, separate sub-profile for the context is preferred, 
+                        containing all the affected classes and properties in that context.
+                        <ol type="a">
+                            <li>Example: <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/">DCAT-AP HVD</a> defines a specific usage context 
+                                spanning Datasets, Data Services and Distributions. That is why it is a separate profile (annex) of DCAT-AP.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    Each profile must express its motivation to exist. That scope reflects into the usage scoping of the classes. 
+                    When a profile combines multiple usage scopes in one document, profile editors must either generalise the usage 
+                    scopes to fit all cases, either create subclasses or sub profiles to document the requirements for each usage scope.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Situation 8. You need to reuse an external vocabulary to describe a related resource. How to express the expectations of that related resource?</h3>
+            
+            <section>
+                <h4>Problem sketch</h4>
+                <p>
+                    Related issue <a href="https://github.com/SEMICeu/GeoDCAT-AP/issues/111">https://github.com/SEMICeu/GeoDCAT-AP/issues/111</a>.
+                </p>
+                <p>
+                    There is a use case that can be addressed by reusing an external specification to describe a related resource. 
+                    The specification already contains extensive documentation on how to describe that resource. Should this description 
+                    be replicated in the new profile, or is linking to it enough?
+                </p>
+                <p>
+                    Example: In DCAT-AP, a standard, to which a Dataset conforms, is linked using 
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.conformsto">Dataset conforms to</a> property, 
+                    which has <code>dcterms:Standard</code> as a range.
+                </p>
+                <p>
+                    The class Standard is then <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Standard">described separately</a>, 
+                    but no specific properties are included in the DCAT-AP specification for this class.
+                </p>
+                <p>
+                    There are no specific requirements on how the linked standards should be described in DCAT-AP.
+                </p>
+                <p>
+                    On the other hand, in GeoDCAT-AP, the class Standard 
+                    <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.1/#Standard">has specific properties from Dublin Core and other vocabularies listed</a>, 
+                    specifying expectations that GeoDCAT-AP applications might have on Standards used in the GeoDCAT-AP context.
+                </p>
+                <p>
+                    The question is whether these properties should be present in GeoDCAT-AP metadata records (e.g. in a catalogue) 
+                    for every standard linked, or whether it is expected that a repository of Standards, which may exist independently 
+                    of the catalogue, will use these properties.
+                </p>
+                <p>
+                    An orthogonal problem is whether these expectations are influenced by the Standard having an IRI or not, 
+                    and that IRI being or not being dereferenceable.
+                </p>
+                <p>
+                    Standards with non-dereferenceable IRIs or standards not identified by IRIs might have to be described by the properties, 
+                    if they are to be identifiable.
+                </p>
+                <p>
+                    Both situations also relate to how the profile owner positions the data specification to its audience: as a specification 
+                    in the landscape of other profiles or as an implementation guideline. In the first perspective it is natural to reference 
+                    to other specifications for the semantics and guidelines, while the implementation perspective draws in decisions based 
+                    on the interpretation of these referenced specifications. That eases the work for implementers but makes the profile 
+                    more dependent on an implementation perspective.
+                </p>
+            </section>
+
+            <section>
+                <h4>What to do</h4>
+                <p>
+                    DCAT-AP profiles should be designed as much as possible from a generic profile perspective, staying close to the core 
+                    classes of DCAT-AP. This approach is about defining the common ground for both perspectives. From this core, an extension 
+                    towards implementation support can be made easily.
+                </p>
+                <p>For the following steps we assume object properties.</p>
+                <ol>
+                    <li>
+                        Set the range for the property to the most appropriate generic class.
+                        <ol type="a">
+                            <li>
+                                The referenced description of the range is sufficient, or only requires a minimum implementation guidelines:
+                                <ul>
+                                    <li>do not add any additional formal constraint to the range.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                The range needs more elaboration:
+                                <ul>
+                                    <li>Data exchanges prefer the use of URI as values, e.g., the value of a licence is preferably a URI
+                                        <ol>
+                                            <li>Reconsider adding additional requirements in the formal specification.</li>
+                                            <li>If needed, add a separate section to handle the case when the shared value is not a URI.</li>
+                                        </ol>
+                                    </li>
+                                    <li>Additional properties are necessary, even if the values are to be shared as a URI
+                                        <ol>
+                                            <li>Consider the impact the property may impose on the management of instances of the range class. 
+                                                For instance, if one requires a title for a licence, then the profile imposes that all licences 
+                                                must have a title. As DCAT-AP profiles overlap, this requirement is not only for the data exchange 
+                                                in the context of the profile but also will impact the work in the context of other profiles, 
+                                                when used in combination.</li>
+                                            <li>Introduce the property presence requirement in the most generic way possible, to minimize the cross-profile interference.</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Explanation</h4>
+                <p>
+                    By focussing on the needs for your use case rather than including all the original information of a reused asset: 
+                    your users can focus on the essentials, the readability of the specification is safe guarded, and it eases the 
+                    burden on creating interoperability.
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Summary</h3>
+            <p>
+                In this section, we have covered the following less frequent, more complex situations, in addition to the common 
+                ones in <a href="#step-2">Step 2 - Consider your use cases and propose their resolution</a>:
+            </p>
+            <ol>
+                <li>Expectations on Linked Data, Dereferenceability and URI behaviour</li>
+                <li>Existing DCAT-AP property/class does not semantically fit the use case</li>
+                <li>Controlled vocabulary attached to a DCAT-AP property does not exactly fit</li>
+                <li>An existing DCAT-AP property description fits the addressed use case, but its range does not</li>
+                <li>You want to add a new property, to which class it should be assigned?</li>
+                <li>DCAT-AP property fits a use case, except for its cardinality</li>
+                <li>You want to reuse a DCAT-AP class but need to change the existing usage scope or definitions</li>
+                <li>You need to reuse an external vocabulary to describe a related resource. How to express the expectations of that related resource?</li>
+            </ol>
+        </section>
+    </section>
+</body>
+</html>
