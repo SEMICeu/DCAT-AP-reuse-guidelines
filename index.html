@@ -277,10 +277,10 @@
                             The contact point property and the Kind class will be reused as-is. This includes their
                             labels, definitions, usage notes and property cardinalities. Since DCAT-AP does not
                             prescribe specific properties to be used for contact point, in this <a
-                                href="https://semiceu.github.io/style-guide/1.0.0/clarification-on-reuse.html#sec:reuse-of-a-class-as-is">"reuse
-                                as-is"</a> scenario, the same situation applies to the DCAT-AP profile.
+                                href="https://semiceu.github.io/style-guide/1.0.0/clarification-on-reuse.html#sec:reuse-of-a-class-as-is"><em>reuse
+                                as-is</em></a> scenario, the same situation applies to the DCAT-AP profile.
                             If specific properties for contact point would be required, see the next case, where
-                            "context specific adjustments are required" to continue.
+                            <em>context specific adjustments are required</em> to continue.
                         </dd>
                     </dl>
                 </section>
@@ -673,8 +673,8 @@
                     <li>
                         Dereferenceable with a minimum content negotiation implemented:
                         <ul>
-                            <li>If the Accept Header is <code>text/html</code> then return the human oriented HTML representation</li>
-                            <li>If the Accept Header is an RDF serialisation then return the corresponding RDF
+                            <li>If the <code>Accept</code> Header is <code>text/html</code> then return the human oriented HTML representation</li>
+                            <li>If the <code>Accept</code> Header is an RDF serialisation then return the corresponding RDF
                                 representation</li>
                         </ul>
                     </li>
@@ -730,14 +730,14 @@
                                     Style Guide</a>.
                                 <ul>
                                     <li>Example: DCAT-AP has <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">"applicable
-                                            legislation"</a>
+                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">applicable
+                                            legislation</a>
                                         property, but in the new profile, the authors would like to call it
-                                        "directives", as this label better fits their context.
-                                        Other than that, the values are "The legislation that mandates the creation or
-                                        management of the Dataset." as stated in the definition.
+                                        <em>directives</em>, as this label better fits their context.
+                                        Other than that, the values are <em>The legislation that mandates the creation or
+                                        management of the Dataset.</em> as stated in the definition.
                                         It is fine if outside of the profile context, the values are labelled as
-                                        "applicable legislation".</li>
+                                        <em>applicable legislation</em>.</li>
                                 </ul>
                             </li>
                             <li>
@@ -751,11 +751,11 @@
                                     Style Guide</a>.
                                 <ul>
                                     <li>Example: DCAT-AP has <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">"applicable
-                                            legislation"</a>
-                                        property, but in the new profile, it is important to distinguish "applicable
-                                        internal legislation" and "applicable national legislation".
-                                        It is fine if both are interpreted as "applicable legislation" outside of the
+                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">applicable
+                                            legislation</a>
+                                        property, but in the new profile, it is important to distinguish <em>applicable
+                                        internal legislation</em> and <em>applicable national legislation</em>.
+                                        It is fine if both are interpreted as <em>applicable legislation</em> outside of the
                                         profile context, but in the profile,
                                         each must be validated separately, as the distinction is significant.</li>
                                 </ul>
@@ -770,8 +770,8 @@
                         needs to be defined and used.
                         <ol type="a">
                             <li>Example: DCAT-AP has <a
-                                    href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">"applicable
-                                    legislation"</a>
+                                    href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">applicable
+                                    legislation</a>
                                 property. In the new profile, the authors want to represent a relation between a Dataset
                                 and internal legislation,
                                 in which the dataset is referred to. In this case, the property cannot be reused,
@@ -1013,8 +1013,8 @@
                                         with the class <a
                                             href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Kind">vcard:Kind</a>
                                         as range.
-                                        The profile requires the value of contact point to be text, such as "telephone:
-                                        +420111222333, fax: 55448889".
+                                        The profile requires the value of contact point to be text, such as <em>telephone:
+                                        +420111222333, fax: 55448889</em>.
                                         This is not possible; another property needs to be used.</li>
                                 </ul>
                             </li>
@@ -1090,8 +1090,8 @@
                                 process the data according to DCAT-AP.
                                 <ul>
                                     <li>Example: DCAT-AP has <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.applicablelegislation">"applicable
-                                            legislation"</a>
+                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.applicablelegislation">applicable
+                                            legislation</a>
                                         property, with range <code>eli:LegalResource</code>. In a profile, instances of
                                         another class, <code>skos:Concept</code>
                                         are used as values of the property. The effect is that the instances will be
@@ -1191,7 +1191,7 @@
                             <li>Provide the label, definition and usage note. Ensure coherency with the formal specification. Most
                                 importantly replace the local class context with the corresponding generic context.
                                 <ol type="i">
-                                    <li>For example, do not write as definition: "status of the Dataset" when the domain is <code>dcat:Resource</code>. Write "status of the catalogued resource" instead.</li>
+                                    <li>For example, do not write as definition: <em>status of the Dataset</em> when the domain is <code>dcat:Resource</code>. Write <em>status of the catalogued resource</em> instead.</li>
                                 </ol>
                             </li>
                         </ol>
@@ -1294,9 +1294,9 @@
                     for the profile audience.
                 </p>
                 <p>
-                    <strong>Example:</strong> In the new profile context, the audience calls Data Interface what in DCAT-AP is called a
+                    <strong>Example:</strong> In the new profile context, the audience calls <em>Data Interface</em> what in DCAT-AP is called a
                     Distribution.
-                    In the new profile, the class <code>dcat:Distribution</code> will therefore have the Data Interface
+                    In the new profile, the class <code>dcat:Distribution</code> will therefore have the <em>Data Interface</em>
                     label,
                     which will be used throughout the profile document.
                 </p>
