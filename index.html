@@ -1419,7 +1419,7 @@
         </section>
 
         <section>
-            <h3>Situation 8. You need to reuse an external vocabulary to describe a related resource. How to express the
+            <h3>You need to reuse an external vocabulary to describe a related resource. How to express the
                 expectations of that related resource?</h3>
 
             <section>
@@ -1436,26 +1436,50 @@
                     be replicated in the new profile, or is linking to it enough?
                 </p>
                 <p>
-                    Example: In DCAT-AP, a standard, to which a Dataset conforms, is linked using
+                    <strong>Example:</strong> In DCAT-AP, a standard, to which a Dataset conforms, is linked using
                     <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.conformsto">Dataset conforms
                         to</a> property,
                     which has <code>dcterms:Standard</code> as a range.
                 </p>
+
+                <figure>
+                    <a href="images/dataset-conformsto.png">
+                        <img src="images/dataset-conformsto.png">
+                    </a>
+                    <figcaption><em>Conforms to</em> property of a Dataset in DCAT-AP</figcaption>
+                </figure>
+
                 <p>
                     The class Standard is then <a
                         href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Standard">described separately</a>,
                     but no specific properties are included in the DCAT-AP specification for this class.
                 </p>
+
+                <figure>
+                    <a href="images/standard-dcat-ap.png">
+                        <img src="images/standard-dcat-ap.png">
+                    </a>
+                    <figcaption><em>Standard</em> class in DCAT-AP</figcaption>
+                </figure>
+
                 <p>
                     There are no specific requirements on how the linked standards should be described in DCAT-AP.
                 </p>
                 <p>
                     On the other hand, in GeoDCAT-AP, the class Standard
-                    <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.1/#Standard">has specific properties from
+                    <a href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#Standard">has specific properties from
                         Dublin Core and other vocabularies listed</a>,
                     specifying expectations that GeoDCAT-AP applications might have on Standards used in the GeoDCAT-AP
                     context.
                 </p>
+                
+                <figure>
+                    <a href="images/standard-geodcat-ap.png">
+                        <img src="images/standard-geodcat-ap.png">
+                    </a>
+                    <figcaption><em>Standard</em> class in GeoDCAT-AP</figcaption>
+                </figure>
+
                 <p>
                     The question is whether these properties should be present in GeoDCAT-AP metadata records (e.g. in a
                     catalogue)
@@ -1463,11 +1487,33 @@
                     independently
                     of the catalogue, will use these properties.
                 </p>
+                <pre class="turtle">
+# GeoDCAT-AP record
+&lt;#service&gt; a dcat:DataService ;
+  dct:conformsTo &lt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&gt; .
+
+# Should the following be in the GeoDCAT-AP record, or in a separate repository of standards?
+&lt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&gt; a dct:Standard ;
+    dct:identifier "urn:ogc:def:crs:OGC:1.3:CRS84"^^xsd:anyURI ;
+    dct:title "CRS84"@en ;
+    dct:type &lt;http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem&gt; ;
+    skos:inScheme &lt;http://www.opengis.net/def/crs/OGC&gt; ;
+    skos:prefLabel "CRS84"@en .</pre>
                 <p>
                     An orthogonal problem is whether these expectations are influenced by the Standard having an IRI or
                     not,
                     and that IRI being or not being dereferenceable.
                 </p>
+                <pre class="turtle">
+# GeoDCAT-AP record, standard without IRI
+&lt;#service&gt; a dcat:DataService ;
+  dct:conformsTo [ a dct:Standard ;
+    dct:identifier "urn:ogc:def:crs:OGC:1.3:CRS84"^^xsd:anyURI ;
+    dct:title "CRS84"@en ;
+    dct:type &lt;http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem&gt; ;
+    skos:inScheme &lt;http://www.opengis.net/def/crs/OGC&gt; ;
+    skos:prefLabel "CRS84"@en .
+] .</pre>
                 <p>
                     Standards with non-dereferenceable IRIs or standards not identified by IRIs might have to be
                     described by the properties,
