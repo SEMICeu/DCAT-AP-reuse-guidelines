@@ -627,7 +627,7 @@
         </p>
 
         <section>
-            <h3>Situation 1. Expectations on Linked Data, Dereferenceability and URI behaviour</h3>
+            <h3>Expectations on Linked Data, Dereferenceability and URI behaviour</h3>
 
             <section>
                 <h4>Problem sketch</h4>
@@ -653,7 +653,7 @@
                         <ol type="a">
                             <li>All new properties should be defined according to the Linked Data principles of
                                 persistent URIs.</li>
-                            <li>The profile specification should be a web enabled html specification</li>
+                            <li>The profile specification should be a web enabled HTML specification</li>
                         </ol>
                     </li>
                     <li>
@@ -672,8 +672,8 @@
                     <li>
                         Dereferenceable with a minimum content negotiation implemented:
                         <ul>
-                            <li>If the Accept Header is html then return the human oriented html representation</li>
-                            <li>If the Accept Header is a RDF serialisation then return the corresponding RDF
+                            <li>If the Accept Header is <code>text/html</code> then return the human oriented HTML representation</li>
+                            <li>If the Accept Header is an RDF serialisation then return the corresponding RDF
                                 representation</li>
                         </ul>
                     </li>
@@ -697,7 +697,7 @@
         </section>
 
         <section>
-            <h3>Situation 2. Existing DCAT-AP property/class does not semantically fit the use case</h3>
+            <h3>Existing DCAT-AP property/class does not semantically fit the use case</h3>
 
             <section>
                 <h4>Problem</h4>
@@ -799,14 +799,14 @@
         </section>
 
         <section>
-            <h3>Situation 3 – Controlled vocabulary attached to a DCAT-AP property does not exactly fit</h3>
+            <h3>Controlled vocabulary attached to a DCAT-AP property does not exactly fit</h3>
 
             <section>
                 <h4>Problem sketch</h4>
                 <p>
                     A reused DCAT-AP property for a certain class fits a use case of the new profile. However, there is
                     a
-                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#controlled-vocs">controlled vocabulary
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#controlled-vocs">controlled vocabulary
                         attached</a>
                     to the property for this class in DCAT-AP, and it is not fit for purpose.
                 </p>
@@ -814,15 +814,13 @@
 
             <section>
                 <h4>What to do</h4>
-                <p>
-                    Various scenarios need to be considered based on the type of constraint and requirement:
-                </p>
                 <ul>
                     <li>
-                        <strong>Some items that are required in the profile are missing in the controlled
-                            vocabulary</strong>
+                        Some items that are required in the profile are missing in the controlled
+                            vocabulary
                         <ul>
-                            <li><strong>Solution 1:</strong> Try to extend the existing controlled vocabulary at its
+                            <li>
+                                <strong>Solution 1:</strong> Try to extend the existing controlled vocabulary at its
                                 source. Many of the specified
                                 controlled vocabularies are managed in <a
                                     href="https://op.europa.eu/en/web/eu-vocabularies/controlled-vocabularies">EU
@@ -836,19 +834,69 @@
                                             href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/frequency">Frequency
                                             controlled vocabulary</a>
                                         that MUST be used with <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.frequency">Dataset
+                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.frequency">Dataset
                                             frequency</a>.
                                     </li>
                                 </ul>
                             </li>
-                            <li><strong>Solution 2:</strong> If the above solution is not feasible, create a separate
+                            <li>
+                                <strong>Solution 2:</strong> If the above solution is not feasible, create a separate
                                 controlled vocabulary,
                                 and decide based on the constraints on the controlled vocabulary usage on the considered
-                                property.</li>
+                                property.
+                                <ul>
+                                    <li>
+                                        The property MUST use the original controlled vocabulary in DCAT-AP
+                                        <ol>
+                                            <li>Create a separate property</li>
+                                            <li>Establish mapping between the overlapping items and consider generating the DCAT-AP compliant usage in
+                                                addition to the profile specific one automatically.
+                                                <ul>
+                                                    <li>Example: For <a
+                                                            href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://data.europa.eu/bna/asd487ae75">High-value
+                                                            dataset categories</a> controlled vocabulary, a separate property, <a
+                                                            href="http://data.europa.eu/r5r/hvdCategory">http://data.europa.eu/r5r/hvdCategory</a>,
+                                                        was created in <a
+                                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset.HVDCategory">DCAT-AP
+                                                            HVD Dataset categories</a> instead of using the controlled vocabulary e.g. with
+                                                        <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.theme">Dataset
+                                                            theme</a>, with which the <a
+                                                            href="https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/data-theme">Data Theme
+                                                            Vocabulary</a> MUST be used. In addition, a mapping of e.g. the Earth
+                                                        observation and environment item from the HVD vocabulary to the Environment
+                                                        item in the Data Theme vocabulary could be established by the data publisher.</li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        The property MUST have at least one value from the original controlled vocabulary in DCAT-AP
+                                        <ol>
+                                            <li>Use at least one value from the original controlled vocabulary with the original property</li>
+                                            <li>For additional values of the original property, use the different controlled vocabulary.</li>
+                                            <li>Consider establishing mapping with the original controlled vocabulary.</li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        The property IS RECOMMENDED to use as range values codes from the original controlled vocabulary in DCAT-AP
+                                        <ol>
+                                            <li>Use the separate controlled vocabulary with the original property</li>
+                                            <li>Consider, if, in addition to the values from the separate controlled vocabulary, values from the original
+                                                one can be used.</li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        The property MAY use as range values codes from the original controlled vocabulary in DCAT-AP
+                                        <ol>
+                                            <li>Use the separate controlled vocabulary with the original property</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li>
-                        <strong>A different controlled vocabulary is to be used</strong>
+                        A different controlled vocabulary is to be used
                         <ul>
                             <li>If another controlled vocabulary is to be used, then it must be used with a different
                                 property.
@@ -877,6 +925,10 @@
                         </ul>
                     </li>
                 </ul>
+
+                <div class="note">
+                    Alternative code list: if allowed, then ensure that the new codelist is published according to the publication recommendations. In the HTML document use, and make the usage requirement stronger
+                </div>
             </section>
 
             <section>
@@ -890,7 +942,7 @@
                     it is to be used with the DCAT-AP indicated controlled vocabulary. This applies unless otherwise
                     specified in a usage note,
                     e.g. in the case of the property <code>dct:publisher</code> and the
-                    <a href="http://publications.europa.eu/resource/authority/continent/">EU Vocabularies Corporate
+                    <a href="https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/corporate-body">EU Vocabularies Corporate
                         bodies Named Authority List</a>.
                 </p>
                 <p>
@@ -906,7 +958,7 @@
         </section>
 
         <section>
-            <h3>Situation 4. An existing DCAT-AP property description fits the addressed use case, but its range does
+            <h3>An existing DCAT-AP property description fits the addressed use case, but its range does
                 not</h3>
 
             <section>
@@ -914,26 +966,30 @@
                 <p>
                     An existing DCAT-AP property fits the use case of the new profile we want to address. However, a
                     different range is required.
+                    For example:
                 </p>
-                <p><strong>Example:</strong></p>
-                <ul>
-                    <li><strong>Use case:</strong> "As a data publisher, I want to represent the spatial resolution of a
-                        Dataset in arbitrary units of measurement."</li>
-                    <li><strong>DCAT-AP situation:</strong> there is a property <a
-                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.spatialresolution">Dataset
+                <dl>
+                    <dt>Use case</dt>
+                    <dd>As a data publisher, I want to represent the spatial resolution of a
+                        Dataset in arbitrary units of measurement.</dd>
+                    <dt>DCAT-AP situation</dt>
+                    <dd>There is a property <a
+                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.spatialresolution">Dataset
                             spatial resolution</a>
                         labelled "spatial resolution", with the definition "The minimum spatial separation resolvable in
                         a dataset, measured in meters."
-                        and the range of <code>xsd:decimal</code>.</li>
-                    <li><strong>Problem:</strong> I want to be able to use arbitrary units of measurement, not just
+                        and the range of <code>xsd:decimal</code>.</dd>
+                    <dt>Problem</dt>
+                    <dd>I want to be able to use arbitrary units of measurement, not just
                         meters. This means that the range
-                        would be a class instead of a literal representing the number of meters.</li>
-                    <li><strong>Solution:</strong> A different property needs to be used, as reuse of the original
+                        would be a class instead of a literal representing the number of meters.</dd>
+                    <dt>Solution</dt>
+                    <dd>A different property needs to be used, as reuse of the original
                         property in this case would not be
                         compatible with DCAT-AP. See the <a
-                            href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.1/#spatial-resolution-spatial-resolution-of-the-dataset">GeoDCAT-AP
-                            3.0 section on the three different ways of representing spatial resolution</a>.</li>
-                </ul>
+                            href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#spatial-resolution-spatial-resolution-of-the-dataset">GeoDCAT-AP
+                            3.0 section on the three different ways of representing spatial resolution</a>.</dd>
+                </dl>
                 <p>
                     There can be several types of range incompatibilities, and what can or cannot be done in each case
                     depends on the exact
@@ -951,10 +1007,10 @@
                             <li>Reuse not possible. Another property needs to be used.
                                 <ul>
                                     <li>Example: In DCAT-AP we have a property <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.contactpoint">Dataset
+                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.contactpoint">Dataset
                                             contact point</a>
                                         with the class <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Kind">vcard:Kind</a>
+                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Kind">vcard:Kind</a>
                                         as range.
                                         The profile requires the value of contact point to be text, such as "telephone:
                                         +420111222333, fax: 55448889".
@@ -986,11 +1042,14 @@
                                             href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#TemporalLiteral">Temporal
                                             Literal</a>,
                                         which means that <code>xsd:gYear</code>, <code>xsd:gYearMonth</code>,
-                                        <code>xsd:date</code> or <code>xsd:dateTime</code> is allowed.</li>
+                                        <code>xsd:date</code> or <code>xsd:dateTime</code> is allowed.
+                                        <ol>
                                     <li>A profile may require that only <code>xsd:date</code> is used, which is OK.</li>
                                     <li>Another profile may require that also <code>xsd:gDay</code> can be used. This
                                         is, however, not possible,
                                         as that datatype is not expected by existing DCAT-AP implementations.</li>
+                                        </ol>
+                                    </li>
                                 </ul>
                             </li>
                         </ol>
@@ -1011,8 +1070,8 @@
                                         meaning any resource can be used. The profile has a controlled vocabulary of
                                         predefined contact points to be used. This is OK.</li>
                                     <li>Example: in DCAT-AP, <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.conformsto">dcterms:conformsTo</a>
-                                        is used to indicate <em>An implementing rule or other specification.</em> of a
+                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.conformsto"><code>dcterms:conformsTo</code></a>
+                                        is used to indicate <em>An implementing rule or other specification</em> of a
                                         dataset. This can be any standard.
                                         The profile is domain-specific, where only a limited set of standards is
                                         admissible. This set will be represented
@@ -1037,7 +1096,7 @@
                                         are used as values of the property. The effect is that the instances will be
                                         treated also as instances of
                                         <code>eli:LegalResource</code> in DCAT-AP implementations.
-                                    </li>
+                                    <ol>
                                     <li>If the definition of <code>eli:LegalResource</code> "This class represents the
                                         legislation, policy or policies that lie behind the Rules that govern the
                                         service."
@@ -1046,6 +1105,7 @@
                                     <li>However, if some of the instances used do not fit the definition of
                                         <code>eli:LegalResource</code>,
                                         then this is not compliant with DCAT-AP.</li>
+                                    </ol></li>
                                 </ul>
                             </li>
                         </ol>
