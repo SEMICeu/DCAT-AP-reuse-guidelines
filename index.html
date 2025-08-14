@@ -1125,7 +1125,7 @@
         </section>
 
         <section>
-            <h3>Situation 5. You want to add a new property, to which class it should be assigned?</h3>
+            <h3>You want to add a new property, to which class it should be assigned?</h3>
 
             <section>
                 <h4>Problem sketch</h4>
@@ -1139,19 +1139,19 @@
                     the
                     <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">applicable
                         legislation of a Dataset</a>
-                    is used at the level of a Dataset with the definition "The legislation that mandates the creation or
-                    management of the Dataset.".
+                    is used at the level of a Dataset with the definition <em>The legislation that mandates the creation or
+                    management of the Dataset</em>.
                     Then, it is used <a
                         href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService.applicablelegislation">again,
                         at the level of a Data Service</a>,
-                    as "The legislation that mandates the creation or management of the Data Service.", reflecting the
+                    as <em>The legislation that mandates the creation or management of the Data Service</em>, reflecting the
                     specifics of the context
                     given by the class on which it is used. However, both usages are of the same property
                     <code>r5r:applicableLegislation</code>.
                     This property is defined separately, in the <a
                         href="https://semiceu.github.io/DCAT-AP/r5r/releases/3.0.0/#applicableLegislation">DCAT-AP
                         Vocabulary</a>,
-                    with the more generic definition "the legislation that is applicable to this resource." and the
+                    with the more generic definition <em>the legislation that is applicable to this resource</em> and the
                     generic domain <code>rdfs:Resource</code>.
                     This is done so that the property itself is reusable in multiple contexts. Then, its reuse can be
                     further described in the
@@ -1174,55 +1174,39 @@
                 <ol>
                     <li>Define the new property in a supporting vocabulary. This consists of
                         <ol type="a">
-                            <li>A URI for the property</li>
-                            <li>A generic label that fits all usage contexts</li>
-                            <li>A generic definition that fits all usage contexts</li>
-                            <li>A generic domain and range</li>
+                            <li>Create if it does not exist yet, or otherwise use a supporting vocabulary in a managed namespace, see <a
+                                    href="https://semiceu.github.io/DCAT-AP/r5r/releases/3.0.0/#applicableLegislation">DCAT-AP
+                                    Vocabulary</a> for the <a
+                                    href="http://data.europa.eu/r5r"><code>http://data.europa.eu/r5r</code></a>
+                                namespace as an example.</li>
+                            <li>Add the property to the supporting vocabulary.</li>
+                            <li>Ensure the domain is as open as possible: use <code>dcat:Resource</code> for catalogable resources, or <code>rdfs:Resource</code> for generic resources</li>
+                            <li>Ensure the range is as open as possible:
+                                <ol type="i">
+                                    <li>For object properties use <code>rdfs:Resource</code>, or a very generic class</li>
+                                    <li>For datatype properties use <code>rdfs:Literal</code>, or <code>rdf:langString</code> (to ensure multilinguality is always supported)</li>
+                                </ol>
+                            </li>
+                            <li>Provide the label, definition and usage note. Ensure coherency with the formal specification. Most
+                                importantly replace the local class context with the corresponding generic context.
+                                <ol type="i">
+                                    <li>For example, do not write as definition: "status of the Dataset" when the domain is <code>dcat:Resource</code>. Write "status of the catalogued resource" instead.</li>
+                                </ol>
+                            </li>
                         </ol>
                     </li>
-                    <li>(where necessary) Improve the usage notes of the reused DCAT-AP classes to provide the readers
-                        with an as much precise context
-                        to understand the difference between an instance for a class in DCAT-AP and an instance of the
-                        corresponding class in the new DCAT-AP profile.
-                        <ol type="a">
-                            <li>Example: There is distinction between a <a
-                                    href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Dataset in
-                                    DCAT-AP</a>
-                                and a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset">Dataset in
-                                    the context of DCAT-AP HVD</a>.
-                                Datasets described in DCAT-AP do not have the requirement to fulfil the HVD IR, while
-                                Datasets in DCAT-AP HVD are fulfilling it.
-                                See the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#scope">DCAT-AP
-                                    HVD Scope definition</a> addressing this.</li>
-                        </ol>
-                    </li>
-                    <li>If there are multiple separate contexts of the same reused class e.g. as with the Distributions
-                        example above, create a subclass
-                        of the corresponding DCAT-AP class for each of the contexts. Apply the same publication rules as
-                        for new properties (as in situation 5)
-                        and introduce the new class in the supporting vocabulary.</li>
-                    <li>If the usage contexts supersede one class, creating an additional, separate sub-profile for the
-                        context is preferred,
-                        containing all the affected classes and properties in that context.
-                        <ol type="a">
-                            <li>Example: <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/">DCAT-AP HVD</a>
-                                defines a specific usage context
-                                spanning Datasets, Data Services and Distributions. That is why it is a separate profile
-                                (annex) of DCAT-AP.</li>
-                        </ol>
-                    </li>
+                    <li>Ensure that this supporting vocabulary is correctly published in HTML and RDF.</li>
+                    <li>Apply the newly created property in the DCAT-AP profile.</li>
                 </ol>
             </section>
 
             <section>
                 <h4>Explanation</h4>
                 <p>
-                    Each profile must express its motivation to exist. That scope reflects into the usage scoping of the
-                    classes.
-                    When a profile combines multiple usage scopes in one document, profile editors must either
-                    generalise the usage
-                    scopes to fit all cases, either create subclasses or sub profiles to document the requirements for
-                    each usage scope.
+                    This application is not different from the usage of any other property already present in DCAT-AP. Use the same reuse steps as described in previous situations to document the usage as precise as possible.
+                </p>
+                <p>
+                    Considering the DCAT-AP profile and the supporting vocabulary as two distinct specifications, each with their own lifecycle, removes the design conflict (detailed usage context versus generic reusable context) profile builders experience.
                 </p>
             </section>
         </section>
