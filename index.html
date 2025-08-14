@@ -27,6 +27,7 @@
                     href: "https://semiceu.github.io/DCAT-AP/releases/3.0.1/"
                 }],
             }],
+            maxTocLevel: 2,
             localBiblio: {
                 "DCAT-AP": {
                     title: "DCAT Application Profile for data portals in Europe",
@@ -626,7 +627,7 @@
             can reuse their approach.
         </p>
 
-        <section>
+        <section id="situation-linked-data-expectations">
             <h3>Expectations on Linked Data, Dereferenceability and URI behaviour</h3>
 
             <section>
@@ -696,7 +697,7 @@
             </section>
         </section>
 
-        <section>
+        <section id="situation-property-class-semantic-mismatch">
             <h3>Existing DCAT-AP property/class does not semantically fit the use case</h3>
 
             <section>
@@ -798,7 +799,7 @@
             </section>
         </section>
 
-        <section>
+        <section id="situation-controlled-vocabulary-mismatch">
             <h3>Controlled vocabulary attached to a DCAT-AP property does not exactly fit</h3>
 
             <section>
@@ -957,7 +958,7 @@
             </section>
         </section>
 
-        <section>
+        <section id="situation-property-range-mismatch">
             <h3>An existing DCAT-AP property description fits the addressed use case, but its range does
                 not</h3>
 
@@ -1124,7 +1125,7 @@
             </section>
         </section>
 
-        <section id="new-property-assignment">
+        <section id="situation-new-property-assignment">
             <h3>You want to add a new property, to which class it should be assigned?</h3>
 
             <section>
@@ -1211,7 +1212,7 @@
             </section>
         </section>
 
-        <section>
+        <section id="situation-property-cardinality-mismatch">
             <h3>DCAT-AP property fits a use case, except for its cardinality</h3>
 
             <section>
@@ -1279,7 +1280,7 @@
             </section>
         </section>
 
-        <section>
+        <section id="situation-class-usage-scope-change">
             <h3>You want to reuse a DCAT-AP class but need to change the existing usage scope or
                 definitions</h3>
 
@@ -1359,7 +1360,7 @@
                         If there are multiple separate contexts of the same reused class e.g. as with the Distributions
                         example above, create a subclass
                         of the corresponding DCAT-AP class for each of the contexts. Apply the same publication rules as
-                        for new properties (as in <a href="#new-property-assignment"></a>)
+                        for new properties (as in <a href="#situation-new-property-assignment"></a>)
                         and introduce the new class in the supporting vocabulary.
                     </li>
                     <li>
@@ -1418,7 +1419,7 @@
             </section>
         </section>
 
-        <section>
+        <section id="situation-external-vocabulary-relationships">
             <h3>You need to reuse an external vocabulary to describe a related resource. How to express the
                 expectations of that related resource?</h3>
 
@@ -1605,19 +1606,18 @@
             <p>
                 In this section, we have covered the following less frequent, more complex situations, in addition to
                 the common
-                ones in <a href="#step-2">Step 2 - Consider your use cases and propose their resolution</a>:
+                ones in <a href="#step-2"></a>:
             </p>
-            <ol>
-                <li>Expectations on Linked Data, Dereferenceability and URI behaviour</li>
-                <li>Existing DCAT-AP property/class does not semantically fit the use case</li>
-                <li>Controlled vocabulary attached to a DCAT-AP property does not exactly fit</li>
-                <li>An existing DCAT-AP property description fits the addressed use case, but its range does not</li>
-                <li>You want to add a new property, to which class it should be assigned?</li>
-                <li>DCAT-AP property fits a use case, except for its cardinality</li>
-                <li>You want to reuse a DCAT-AP class but need to change the existing usage scope or definitions</li>
-                <li>You need to reuse an external vocabulary to describe a related resource. How to express the
-                    expectations of that related resource?</li>
-            </ol>
+            <ul>
+                <li><a href="#situation-linked-data-expectations"></a></li>
+                <li><a href="#situation-property-class-semantic-mismatch"></a></li>
+                <li><a href="#situation-controlled-vocabulary-mismatch"></a></li>
+                <li><a href="#situation-property-range-mismatch"></a></li>
+                <li><a href="#situation-new-property-assignment"></a></li>
+                <li><a href="#situation-property-cardinality-mismatch"></a></li>
+                <li><a href="#situation-class-usage-scope-change"></a></li>
+                <li><a href="#situation-external-vocabulary-relationships"></a></li>
+            </ul>
         </section>
     </section>
 </body>
