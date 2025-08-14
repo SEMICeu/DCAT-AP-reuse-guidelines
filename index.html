@@ -1124,7 +1124,7 @@
             </section>
         </section>
 
-        <section>
+        <section id="new-property-assignment">
             <h3>You want to add a new property, to which class it should be assigned?</h3>
 
             <section>
@@ -1280,7 +1280,7 @@
         </section>
 
         <section>
-            <h3>Situation 7. You want to reuse a DCAT-AP class but need to change the existing usage scope or
+            <h3>You want to reuse a DCAT-AP class but need to change the existing usage scope or
                 definitions</h3>
 
             <section>
@@ -1293,7 +1293,7 @@
                     for the profile audience.
                 </p>
                 <p>
-                    Example: In the new profile context, the audience calls Data Interface what in DCAT-AP is called a
+                    <strong>Example:</strong> In the new profile context, the audience calls Data Interface what in DCAT-AP is called a
                     Distribution.
                     In the new profile, the class <code>dcat:Distribution</code> will therefore have the Data Interface
                     label,
@@ -1306,13 +1306,13 @@
                     distinct usage contexts together.
                 </p>
                 <p>
-                    Example: I want to have a different set of mandatory properties for Distribution when it represents
+                    <strong>Example:</strong> I want to have a different set of mandatory properties for Distribution when it represents
                     a downloadable file,
                     and a different set of mandatory properties for Distribution when it represents a data service. Then
                     in the usage notes
-                    of all properties, I need to repeat sentences like "If the Distribution represents a Data Service,
+                    of all properties, I need to repeat sentences like <em>If the Distribution represents a Data Service,
                     this is mandatory.
-                    If the Distribution represents a downloadable file, this is not mandatory."
+                    If the Distribution represents a downloadable file, this is not mandatory.</em>
                 </p>
                 <p>
                     Without taking any measures, integrating distinct usage contexts into one class leads to more
@@ -1329,22 +1329,22 @@
                         without a well
                         circumscribed context is subject to the existential question: what does this profile address
                         differently than DCAT-AP?
-                        <ol type="a">
-                            <li>Example 1: State "This profile describes Datasets coming from the Zoological domain." –
+                        <ul>
+                            <li><strong>Example 1:</strong> State <em>This profile describes Datasets coming from the Zoological domain.</em> -
                                 then it is clear that what
                                 is written in this profile does not apply elsewhere.</li>
-                            <li>Example 2: See the <a
+                            <li><strong>Example 2:</strong> See the <a
                                     href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#context">DCAT-AP HVD
                                     Context</a></li>
-                        </ol>
+                        </ul>
                     </li>
                     <li>
                         (where necessary) Improve the usage notes of the reused DCAT-AP classes to provide the readers
-                        with an as much precise context
+                        with an as much precise context as possible
                         to understand the difference between an instance for a class in DCAT-AP and an instance of the
                         corresponding class in the new DCAT-AP profile.
-                        <ol type="a">
-                            <li>Example: There is distinction between a <a
+                        <ul>
+                            <li><strong>Example:</strong> There is distinction between a <a
                                     href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Dataset in
                                     DCAT-AP</a>
                                 and a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset">Dataset in
@@ -1353,13 +1353,13 @@
                                 Datasets in DCAT-AP HVD are fulfilling it.
                                 See the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#scope">DCAT-AP
                                     HVD Scope definition</a> addressing this.</li>
-                        </ol>
+                        </ul>
                     </li>
                     <li>
                         If there are multiple separate contexts of the same reused class e.g. as with the Distributions
                         example above, create a subclass
                         of the corresponding DCAT-AP class for each of the contexts. Apply the same publication rules as
-                        for new properties (as in situation 5)
+                        for new properties (as in <a href="#new-property-assignment"></a>)
                         and introduce the new class in the supporting vocabulary.
                     </li>
                     <li>
@@ -1367,7 +1367,7 @@
                         context is preferred,
                         containing all the affected classes and properties in that context.
                         <ol type="a">
-                            <li>Example: <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/">DCAT-AP HVD</a>
+                            <li><strong>Example:</strong> <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/">DCAT-AP HVD</a>
                                 defines a specific usage context
                                 spanning Datasets, Data Services and Distributions. That is why it is a separate profile
                                 (annex) of DCAT-AP.</li>
@@ -1385,6 +1385,35 @@
                     generalise the usage
                     scopes to fit all cases, either create subclasses or sub profiles to document the requirements for
                     each usage scope.
+                </p>
+                <p>
+                    <strong>Reasoning example:</strong> If one would merge <a
+                        href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/">DCAT-AP</a> with its annex <a
+                        href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/">DCAT-AP HVD</a> into one document having one formal
+                    representation of the two usage contexts (outside of HVD and within HVD) then one can either:
+                </p>
+                <ol type="a">
+                    <li>Write in the usage notes of each property: <em>If this property is
+                        used to describe a High Value Dataset then the following additional guidelines hold ...</em>
+                        <ol type="i">
+                            <li>If that applies to a single property in one class, then it may be acceptable.</li>
+                            <li>But in this case, it would apply to many properties, exploding the size of the formal description, and
+                                thus creating a burden for the reader to apply the guidelines depending on the
+                                usage context correctly.</li>
+                        </ol>
+                    </li>
+                    <li>Create an HVD Dataset subclass of a DCAT-AP Dataset and associating
+                        all HVD requirements solely with that subclass, the audience reading the single
+                        document having interest in the HVD context will find more condensed
+                        descriptions of the implementation requirements.</li>
+                </ol>
+                <p>
+                    However, if the usage context supersedes a single class, and
+                    requires more support, then it is advised to create an additional, separate sub-profile of the
+                    currently created profile, describing that usage context. This is the motivation for
+                    creating the DCAT-AP HVD as annex (profile) of DCAT-AP, as there are specific
+                    HVD related requirements not only for Datasets, but also for Data Services and
+                    Distributions.
                 </p>
             </section>
         </section>
