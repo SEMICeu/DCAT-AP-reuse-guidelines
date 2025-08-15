@@ -48,6 +48,14 @@ pre.turtle code.turtle-highlighted {
     font-weight: bold; 
 }
 
+.turtle-keyword-a { 
+    color: #24292e; 
+}
+
+.turtle-prefix-keyword { 
+    color: #656d76; 
+}
+
 .turtle-prefixed { 
     color: #8250df; 
 }
@@ -94,6 +102,14 @@ pre.turtle code.turtle-highlighted {
     
     .turtle-keyword { 
         color: #79c0ff; 
+    }
+    
+    .turtle-keyword-a { 
+        color: #e6edf3; 
+    }
+    
+    .turtle-prefix-keyword { 
+        color: #8b949e; 
     }
     
     .turtle-prefixed { 

@@ -1,5 +1,4 @@
 // Turtle syntax highlighting for ReSpec documents
-// Custom implementation for DCAT-AP reuse guidelines
 
 async function setupTurtleHighlighting() {
     const turtleBlocks = document.querySelectorAll('pre.turtle');
@@ -110,31 +109,84 @@ function processPrefixedNames(text) {
     
     let fragment = document.createDocumentFragment();
     
-    // Handle prefixed names (namespace:localname)
-    let prefixRegex = /\b([a-zA-Z][a-zA-Z0-9]*):([a-zA-Z][a-zA-Z0-9_-]*)\b/g;
+    // First handle @prefix declarations specifically
+    // Allow hyphens, underscores, and dots in prefix names (e.g., l111-2009)
+    let prefixDeclRegex = /(@prefix\s+)([\p{L}][\p{L}\p{N}\-_.]*?)(\s*:)/gu;
     let lastIndex = 0;
-    let prefixMatch;
+    let prefixDeclMatch;
     
-    while ((prefixMatch = prefixRegex.exec(text)) !== null) {
-        // Add text before match
-        if (prefixMatch.index > lastIndex) {
-            let beforeText = text.substring(lastIndex, prefixMatch.index);
-            fragment.appendChild(processKeywords(beforeText));
+    while ((prefixDeclMatch = prefixDeclRegex.exec(text)) !== null) {
+        // Add text before prefix declaration
+        if (prefixDeclMatch.index > lastIndex) {
+            let beforeText = text.substring(lastIndex, prefixDeclMatch.index);
+            fragment.appendChild(processGenericPrefixedNames(beforeText));
         }
         
-        // Add prefix part
+        // Add @prefix keyword
+        let prefixKeywordSpan = document.createElement('span');
+        prefixKeywordSpan.className = 'turtle-prefix-keyword';
+        prefixKeywordSpan.textContent = prefixDeclMatch[1].trim();
+        fragment.appendChild(prefixKeywordSpan);
+        
+        // Add whitespace
+        fragment.appendChild(document.createTextNode(' '));
+        
+        // Add prefix name
         let prefixSpan = document.createElement('span');
         prefixSpan.className = 'turtle-prefix-name';
-        prefixSpan.textContent = prefixMatch[1];
+        prefixSpan.textContent = prefixDeclMatch[2];
         fragment.appendChild(prefixSpan);
         
         // Add colon
         fragment.appendChild(document.createTextNode(':'));
         
-        // Add local name part
+        lastIndex = prefixDeclMatch.index + prefixDeclMatch[0].length;
+    }
+    
+    // Handle remaining text with generic prefixed names
+    if (lastIndex < text.length) {
+        let remainingText = text.substring(lastIndex);
+        fragment.appendChild(processGenericPrefixedNames(remainingText));
+    }
+    
+    return fragment;
+}
+
+function processGenericPrefixedNames(text) {
+    if (!text) return document.createTextNode('');
+    
+    let fragment = document.createDocumentFragment();
+    
+    // Handle prefixed names (namespace:localname) - Updated to support Unicode characters
+    // Using word boundaries that work with Unicode characters, including ^^ for datatypes
+    // Allow hyphens, underscores, and dots in prefix names (e.g., l111-2009)
+    let prefixRegex = /(^|[\s\[\](),;.^])([\p{L}][\p{L}\p{N}\-_.]*):([^\s<>"{}|`\\;,\[\]()]+)/gu;
+    let lastIndex = 0;
+    let prefixMatch;
+    
+    while ((prefixMatch = prefixRegex.exec(text)) !== null) {
+        // Add text before match (including any preceding characters)
+        if (prefixMatch.index > lastIndex) {
+            let beforeText = text.substring(lastIndex, prefixMatch.index);
+            fragment.appendChild(processKeywords(beforeText));
+        }
+        
+        // Add the delimiter/whitespace that was captured in group 1
+        fragment.appendChild(document.createTextNode(prefixMatch[1]));
+        
+        // Add prefix part (group 2)
+        let prefixSpan = document.createElement('span');
+        prefixSpan.className = 'turtle-prefix-name';
+        prefixSpan.textContent = prefixMatch[2];
+        fragment.appendChild(prefixSpan);
+        
+        // Add colon
+        fragment.appendChild(document.createTextNode(':'));
+        
+        // Add local name part (group 3)
         let localSpan = document.createElement('span');
         localSpan.className = 'turtle-local-name';
-        localSpan.textContent = prefixMatch[2];
+        localSpan.textContent = prefixMatch[3];
         fragment.appendChild(localSpan);
         
         lastIndex = prefixMatch.index + prefixMatch[0].length;
@@ -154,8 +206,8 @@ function processKeywords(text) {
     
     let fragment = document.createDocumentFragment();
     
-    // Handle language tags
-    let langRegex = /@([a-zA-Z][a-zA-Z0-9-]*)\b/g;
+    // Handle language tags - Updated to support Unicode characters
+    let langRegex = /@([\p{L}][\p{L}\p{N}-]*)\b/gu;
     let lastIndex = 0;
     let match;
     
@@ -189,22 +241,31 @@ function processSimpleKeywords(text) {
     
     let fragment = document.createDocumentFragment();
     
-    // Handle 'a', 'true', 'false' keywords
-    let keywordRegex = /\b(a|true|false)\b/g;
+    // Handle '@prefix', 'a', 'true', 'false' keywords
+    // Use explicit boundaries that work with Unicode characters
+    let keywordRegex = /(^|[\s\[\](),;.])(@prefix|a|true|false)(?=[\s\[\](),;.]|$)/g;
     let lastIndex = 0;
     let match;
     
     while ((match = keywordRegex.exec(text)) !== null) {
-        // Add text before keyword
+        // Add text before keyword (including any preceding characters)
         if (match.index > lastIndex) {
             let beforeText = text.substring(lastIndex, match.index);
             fragment.appendChild(document.createTextNode(beforeText));
         }
         
-        // Add highlighted keyword
+        // Add the delimiter/whitespace that was captured in group 1
+        fragment.appendChild(document.createTextNode(match[1]));
+        
+        // Add highlighted keyword (group 2)
         let keywordSpan = document.createElement('span');
-        keywordSpan.className = 'turtle-keyword';
-        keywordSpan.textContent = match[1];
+        // Use different styling for 'a' keyword vs other keywords
+        if (match[2] === 'a') {
+            keywordSpan.className = 'turtle-keyword-a';
+        } else {
+            keywordSpan.className = 'turtle-keyword';
+        }
+        keywordSpan.textContent = match[2];
         fragment.appendChild(keywordSpan);
         
         lastIndex = match.index + match[0].length;
