@@ -5,6 +5,11 @@
     <meta charset='utf-8'>
     <meta name="color-scheme" content="light dark">
     <title>How to create your DCAT-AP profile</title>
+    
+    <!-- RDF Turtle syntax highlighting -->
+    <link rel="stylesheet" href="css/turtle-highlighting.css">
+    <script src='scripts/turtle-highlighting.js' class='remove'></script>
+
     <script src='https://www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
     <script class='remove'>
         var respecConfig = {
@@ -44,7 +49,9 @@
                     href: "https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/",
                     date: "2024"
                 }
-            }
+            },
+            historyURI: null,
+            postProcess: [setupTurtleHighlighting],
         };
     </script>
 </head>
