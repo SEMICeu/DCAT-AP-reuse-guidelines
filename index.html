@@ -223,12 +223,12 @@
             </p>
 
             <ul>
-                <li>As a data publisher, I want to represent dataset distribution file format</li>
+                <li>As a data publisher, I want to represent a dataset distribution's file format.</li>
                 <li>As a publisher, for an HVD dataset, I require applicable legislation to point to a specific
                     legislation IRI.</li>
-                <li>As a data consumer, I want to know the language of a Data Service</li>
-                <li>As a data publisher, I want to annotate Data Service with their category.</li>
-                <li>As a data publisher, I want to include the HVD category in my national DCAT-AP profile</li>
+                <li>As a data consumer, I want to know the language of a Data Service.</li>
+                <li>As a data publisher, I want to annotate a Data Service with its category.</li>
+                <li>As a data publisher, I want to include the HVD category in my national DCAT-AP profile.</li>
             </ul>
 
             <p>
@@ -273,7 +273,7 @@
                 </section>
 
                 <section>
-                    <h5>More complex example - the use case is covered by an existing class existing properties in
+                    <h5>More complex example - the use case is covered by existing classes and properties in
                         DCAT-AP</h5>
                     <dl>
                         <dt>Use case</dt>
@@ -300,7 +300,7 @@
                                 href="https://semiceu.github.io/style-guide/1.0.0/clarification-on-reuse.html#sec:reuse-of-a-class-as-is"><em>reuse
                                 as-is</em></a> scenario, the same situation applies to the DCAT-AP profile.
                             If specific properties for contact point would be required, see the next case, where
-                            <em>context specific adjustments are required</em> to continue.
+                            <em>context-specific adjustments are required</em> to continue.
                         </dd>
                     </dl>
                 </section>
@@ -311,7 +311,7 @@
                 <p>
                     For example, in Czechia, every distribution needs to have a licence. This is not required by
                     DCAT-AP.
-                    It is however an adjustment that tightens existing constrains. Specifically, the cardinality of
+                    It is however an adjustment that tightens existing constraints. Specifically, the cardinality of
                     <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Distribution.licence">Distribution
                         licence</a>
                     in DCAT-AP is <code>0..1</code>, and in the new profile, it will be <code>1..1</code>. However, if
@@ -626,7 +626,7 @@
             <p>
                 Making the profile publicly accessible serves not only the intended audience, but also the broader
                 community,
-                increasing cross fertilisation, i.e. avoiding situations where various profiles address similar use
+                increasing cross-fertilisation, i.e. avoiding situations where various profiles address similar use
                 cases in
                 different ways, making them less interoperable, and the overall profile ecosystem more complex.
             </p>
@@ -688,16 +688,11 @@
                     </li>
                 </ol>
 
-                <p>Persistent URIs are</p>
+                <p>Persistent URIs are dereferenceable with a minimal implementation of content negotiation:</p>
                 <ul>
-                    <li>
-                        Dereferenceable with a minimum content negotiation implemented:
-                        <ul>
-                            <li>If the <code>Accept</code> Header is <code>text/html</code> then return the human oriented HTML representation</li>
-                            <li>If the <code>Accept</code> Header is an RDF serialisation then return the corresponding RDF
-                                representation</li>
-                        </ul>
-                    </li>
+                    <li>If the <code>Accept</code> Header is <code>text/html</code> then return the human-oriented HTML representation</li>
+                    <li>If the <code>Accept</code> Header is an RDF serialisation then return the corresponding RDF
+                        representation</li>
                 </ul>
             </section>
 
@@ -749,7 +744,7 @@
                                     href="https://semiceu.github.io/style-guide/1.0.0/clarification-on-reuse.html#sec:reuse-of-a-class-with-terminological-adaptations">SEMIC
                                     Style Guide</a>.
                                 <ul>
-                                    <li>Example: DCAT-AP has <a
+                                    <li>Example: DCAT-AP has the <a
                                             href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.applicablelegislation">applicable
                                             legislation</a>
                                         property, but in the new profile, the authors would like to call it
@@ -863,15 +858,14 @@
                             <li>
                                 <strong>Solution 2:</strong> If the above solution is not feasible, create a separate
                                 controlled vocabulary,
-                                and decide based on the constraints on the controlled vocabulary usage on the considered
-                                property.
+                                and decide based upon how the controlled vocabulary is originally used for the considered property.
                                 <ul>
                                     <li>
                                         The property MUST use the original controlled vocabulary in DCAT-AP
                                         <ol>
                                             <li>Create a separate property</li>
                                             <li>Establish mapping between the overlapping items and consider generating the DCAT-AP compliant usage in
-                                                addition to the profile specific one automatically.
+                                                addition to the profile-specific one automatically.
                                                 <ul>
                                                     <li>Example: For <a
                                                             href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://data.europa.eu/bna/asd487ae75">High-value
@@ -894,8 +888,8 @@
                                         The property MUST have at least one value from the original controlled vocabulary in DCAT-AP
                                         <ol>
                                             <li>Use at least one value from the original controlled vocabulary with the original property</li>
-                                            <li>For additional values of the original property, use the different controlled vocabulary.</li>
-                                            <li>Consider establishing mapping with the original controlled vocabulary.</li>
+                                            <li>For additional values of the original property, use the newly created controlled vocabulary.</li>
+                                            <li>Consider establishing a mapping between the original controlled vocabulary and the new one.</li>
                                         </ol>
                                     </li>
                                     <li>
@@ -967,7 +961,7 @@
                 </p>
                 <p>
                     When, for a certain property used with a class, values from a controlled vocabulary MAY be used or
-                    ARE RECOMMENDED to be used,
+                    are RECOMMENDED to be used,
                     alternative controlled vocabularies are allowed or tolerated instead of values from the original
                     one. When the property MUST
                     have at least one value from a controlled vocabulary, values from other controlled vocabularies are
@@ -1192,9 +1186,9 @@
             <section>
                 <h4>What to do</h4>
                 <ol>
-                    <li>Define the new property in a supporting vocabulary. This consists of
+                    <li>Define the new property in a supporting vocabulary as follows:
                         <ol type="a">
-                            <li>Create if it does not exist yet, or otherwise use a supporting vocabulary in a managed namespace, see <a
+                            <li>Create the property if it does not exist yet, or otherwise use a supporting vocabulary in a managed namespace. See <a
                                     href="https://semiceu.github.io/DCAT-AP/r5r/releases/3.0.0/#applicableLegislation">DCAT-AP
                                     Vocabulary</a> for the <a
                                     href="http://data.europa.eu/r5r"><code>http://data.europa.eu/r5r</code></a>
@@ -1210,7 +1204,7 @@
                             <li>Provide the label, definition and usage note. Ensure coherency with the formal specification. Most
                                 importantly replace the local class context with the corresponding generic context.
                                 <ol type="i">
-                                    <li>For example, do not write as definition: <em>status of the Dataset</em> when the domain is <code>dcat:Resource</code>. Write <em>status of the catalogued resource</em> instead.</li>
+                                    <li>For example, do not write as definition: <em>status of the Dataset</em> when the domain is <code>dcat:Resource</code>. Write <em>status of the Catalogued Resource</em> instead.</li>
                                 </ol>
                             </li>
                         </ol>
@@ -1223,10 +1217,10 @@
             <section>
                 <h4>Explanation</h4>
                 <p>
-                    This application is not different from the usage of any other property already present in DCAT-AP. Use the same reuse steps as described in previous situations to document the usage as precise as possible.
+                    This situation is not different from the usage of any other property already present in DCAT-AP. Use the same reuse steps as described in previous situations to document the usage as precise as possible.
                 </p>
                 <p>
-                    Considering the DCAT-AP profile and the supporting vocabulary as two distinct specifications, each with their own lifecycle, removes the design conflict (detailed usage context versus generic reusable context) profile builders experience.
+                    Consider the DCAT-AP profile and the supporting vocabulary as two distinct specifications, each with their own lifecycle. This helps to prevent design conflicts in the profile, e.g., detailed usage context versus generic reusable context.
                 </p>
             </section>
         </section>
@@ -1237,7 +1231,7 @@
             <section>
                 <h4>Problem sketch</h4>
                 <p>
-                    A DCAT-AP property has a cardinality different than required by the new profile.
+                    A DCAT-AP property's cardinality is different in the new profile.
                 </p>
             </section>
 
@@ -1262,12 +1256,12 @@
                                 <code>0..1</code>)
                                 <ol>
                                     <li>Then in the profile, the property also must have at most one value.</li>
-                                    <li>If there is a good case to change this on DCAT-AP level, <a
+                                    <li>If it makes sense to change this on the level of DCAT-AP, <a
                                             href="https://github.com/SEMICeu/DCAT-AP/issues">raise an issue</a>.
                                         <ul>
                                             <li>Example: For GeoDCAT-AP, Catalogue (Distribution) <a
                                                     href="https://github.com/SEMICeu/DCAT-AP/issues/370">rights
-                                                    cardinality needs to be relaxed</a>
+                                                    cardinality needed to be relaxed</a>
                                                 from <code>0..1</code> to <code>0..*</code>, which was escalated as a
                                                 DCAT-AP issue.</li>
                                         </ul>
@@ -1301,20 +1295,18 @@
 
         <section id="situation-class-usage-scope-change">
             <h3>You want to reuse a DCAT-AP class but need to change the existing usage scope or
-                definitions</h3>
+                definition</h3>
 
             <section>
                 <h4>Problem sketch</h4>
                 <p>
                     A new DCAT-AP profile describes the use of DCAT-AP in a new usage context. The generic DCAT-AP
                     descriptions for the
-                    classes, such as Catalogue, Dataset, Distribution, ... may need to be contextualised for the profile
-                    to be supportive
-                    for the profile audience.
+                    classes, e.g., Catalogue, Dataset and Distribution, may need to be contextualised for the profile
+                    to make sense to its audience.
                 </p>
                 <p>
-                    <strong>Example:</strong> In the new profile context, the audience calls <em>Data Interface</em> what in DCAT-AP is called a
-                    Distribution.
+                    <strong>Example:</strong> In the new profile context, the audience gives the name <em>Data Interface</em> to a DCAT-AP Distribution.
                     In the new profile, the class <code>dcat:Distribution</code> will therefore have the <em>Data Interface</em>
                     label,
                     which will be used throughout the profile document.
@@ -1337,7 +1329,7 @@
                 <p>
                     Without taking any measures, integrating distinct usage contexts into one class leads to more
                     complex and longer usage
-                    descriptions. And, therefore, increasing the risk for misinterpretations.
+                    descriptions. This increases the risk for misinterpretations.
                 </p>
             </section>
 
@@ -1359,25 +1351,25 @@
                         </ul>
                     </li>
                     <li>
-                        (where necessary) Improve the usage notes of the reused DCAT-AP classes to provide the readers
-                        with an as much precise context as possible
-                        to understand the difference between an instance for a class in DCAT-AP and an instance of the
+                        Improve the usage notes (where necessary) of the reused DCAT-AP classes to provide the readers
+                        with an as precise context as possible
+                        to understand the difference between an instance of a class in DCAT-AP and an instance of its
                         corresponding class in the new DCAT-AP profile.
                         <ul>
-                            <li><strong>Example:</strong> There is distinction between a <a
+                            <li><strong>Example:</strong> There is a distinction between a <a
                                     href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Dataset in
                                     DCAT-AP</a>
                                 and a <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset">Dataset in
                                     the context of DCAT-AP HVD</a>.
-                                Datasets described in DCAT-AP do not have the requirement to fulfil the HVD IR, while
+                                Datasets described in DCAT-AP do not have the requirement to fulfill the HVD IR, while
                                 Datasets in DCAT-AP HVD are fulfilling it.
                                 See the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#scope">DCAT-AP
                                     HVD Scope definition</a> addressing this.</li>
                         </ul>
                     </li>
                     <li>
-                        If there are multiple separate contexts of the same reused class e.g. as with the Distributions
-                        example above, create a subclass
+                        If there are multiple separate contexts of the same reused class (see the Distributions
+                        example above), create a subclass
                         of the corresponding DCAT-AP class for each of the contexts. Apply the same publication rules as
                         for new properties (as in <a href="#situation-new-property-assignment"></a>)
                         and introduce the new class in the supporting vocabulary.
@@ -1399,11 +1391,11 @@
             <section>
                 <h4>Explanation</h4>
                 <p>
-                    Each profile must express its motivation to exist. That scope reflects into the usage scoping of the
+                    Each profile must express its motivation to exist. That scope is reflected in the usage scoping of the
                     classes.
                     When a profile combines multiple usage scopes in one document, profile editors must either
                     generalise the usage
-                    scopes to fit all cases, either create subclasses or sub profiles to document the requirements for
+                    scopes to fit all cases, or create subclasses or sub profiles to document the requirements for
                     each usage scope.
                 </p>
                 <p>
@@ -1432,7 +1424,7 @@
                     requires more support, then it is advised to create an additional, separate sub-profile of the
                     currently created profile, describing that usage context. This is the motivation for
                     creating the DCAT-AP HVD as annex (profile) of DCAT-AP, as there are specific
-                    HVD related requirements not only for Datasets, but also for Data Services and
+                    HVD-related requirements not only for Datasets, but also for Data Services and
                     Distributions.
                 </p>
             </section>
@@ -1457,9 +1449,9 @@
                 </p>
                 <p>
                     <strong>Example:</strong> In DCAT-AP, a standard, to which a Dataset conforms, is linked using
-                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.conformsto">Dataset conforms
+                    the Dataset's <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.conformsto">conforms
                         to</a> property,
-                    which has <code>dcterms:Standard</code> as a range.
+                    which has <code>dcterms:Standard</code> as its range.
                 </p>
 
                 <figure>
@@ -1561,49 +1553,44 @@
                     this core, an extension
                     towards implementation support can be made easily.
                 </p>
-                <p>For the following steps we assume object properties.</p>
-                <ol>
+                <p>Set the range for the object property to the most appropriate generic class as follows:</p>
+                <ol type="a">
                     <li>
-                        Set the range for the property to the most appropriate generic class.
-                        <ol type="a">
-                            <li>
-                                The referenced description of the range is sufficient, or only requires a minimum
-                                implementation guidelines:
-                                <ul>
-                                    <li>do not add any additional formal constraint to the range.</li>
-                                </ul>
-                            </li>
-                            <li>
-                                The range needs more elaboration:
-                                <ul>
-                                    <li>Data exchanges prefer the use of URI as values, e.g., the value of a licence is
-                                        preferably a URI
-                                        <ol>
-                                            <li>Reconsider adding additional requirements in the formal specification.
-                                            </li>
-                                            <li>If needed, add a separate section to handle the case when the shared
-                                                value is not a URI.</li>
-                                        </ol>
+                        The referenced description of the range is sufficient, or only requires minimal
+                        implementation guidelines:
+                        <ul>
+                            <li>do not add formal constraints to the range.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        The range needs more elaboration:
+                        <ul>
+                            <li>Data exchanges prefer the use of URI as values, e.g., the value of a licence is
+                                preferably a URI
+                                <ol>
+                                    <li>Reconsider adding additional requirements in the formal specification.
                                     </li>
-                                    <li>Additional properties are necessary, even if the values are to be shared as a
-                                        URI
-                                        <ol>
-                                            <li>Consider the impact the property may impose on the management of
-                                                instances of the range class.
-                                                For instance, if one requires a title for a licence, then the profile
-                                                imposes that all licences
-                                                must have a title. As DCAT-AP profiles overlap, this requirement is not
-                                                only for the data exchange
-                                                in the context of the profile but also will impact the work in the
-                                                context of other profiles,
-                                                when used in combination.</li>
-                                            <li>Introduce the property presence requirement in the most generic way
-                                                possible, to minimise the cross-profile interference.</li>
-                                        </ol>
-                                    </li>
-                                </ul>
+                                    <li>If needed, add a separate section to handle the case when the shared
+                                        value is not a URI.</li>
+                                </ol>
                             </li>
-                        </ol>
+                            <li>Additional object properties are necessary, even if the values are to be shared as a
+                                URI
+                                <ol>
+                                    <li>Consider the impact the object property may impose on the management of
+                                        instances of the range class.
+                                        For instance, if one requires a title for a licence, then the profile
+                                        imposes that all licences
+                                        must have a title. As DCAT-AP profiles overlap, this requirement is not
+                                        only for the data exchange
+                                        in the context of the profile but also will impact the work in the
+                                        context of other profiles,
+                                        when used in combination.</li>
+                                    <li>Introduce the object property presence requirement in the most generic way
+                                        possible, to minimise the cross-profile interference.</li>
+                                </ol>
+                            </li>
+                        </ul>
                     </li>
                 </ol>
             </section>
@@ -1611,11 +1598,8 @@
             <section>
                 <h4>Explanation</h4>
                 <p>
-                    By focussing on the needs for your use case rather than including all the original information of a
-                    reused asset:
-                    your users can focus on the essentials, the readability of the specification is safe guarded, and it
-                    eases the
-                    burden on creating interoperability.
+                    Focus on the needs of your use case instead of including all the original information of a
+                    reused asset. That way your users can focus on the essentials. It also safeguards the readability of the specification and eases the burden on creating interoperability.
                 </p>
             </section>
         </section>
