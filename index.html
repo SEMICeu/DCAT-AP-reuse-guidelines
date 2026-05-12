@@ -840,121 +840,120 @@
             </section>
 
             <section>
-                <h4>What to do</h4>
-                <ul>
-                    <li>
-                        Some items that are required in the profile are missing in the controlled
-                            vocabulary
-                        <ul>
-                            <li>
-                                <strong>Solution 1:</strong> Try to extend the existing controlled vocabulary at its
-                                source. Many of the specified
-                                controlled vocabularies are managed in <a
-                                    href="https://op.europa.eu/en/web/eu-vocabularies/controlled-vocabularies">EU
-                                    Vocabularies</a>,
-                                and there is a possibility to submit additional items in them. Similarly, this may be
-                                possible with other controlled vocabulary publishers.
-                                <ul>
-                                    <li>Example: For GeoDCAT-AP 3.0.0, <code>AS_NEEDED</code> and
-                                        <code>NOT_PLANNED</code> items were added to the
-                                        <a
-                                            href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/frequency">Frequency
-                                            controlled vocabulary</a>
-                                        that MUST be used with <a
-                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.frequency">Dataset
-                                            frequency</a>.
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <strong>Solution 2:</strong> If the above solution is not feasible, create a separate
-                                controlled vocabulary,
-                                and decide based on the constraints on the controlled vocabulary usage on the considered
-                                property.
-                                <ul>
-                                    <li>
-                                        The property MUST use the original controlled vocabulary in DCAT-AP
-                                        <ol>
-                                            <li>Create a separate property</li>
-                                            <li>Establish mapping between the overlapping items and consider generating the DCAT-AP compliant usage in
-                                                addition to the profile specific one automatically.
-                                                <ul>
-                                                    <li>Example: For <a
-                                                            href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://data.europa.eu/bna/asd487ae75">High-value
-                                                            dataset categories</a> controlled vocabulary, a separate property, <a
-                                                            href="http://data.europa.eu/r5r/hvdCategory">http://data.europa.eu/r5r/hvdCategory</a>,
-                                                        was created in <a
-                                                            href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset.HVDCategory">DCAT-AP
-                                                            HVD Dataset categories</a> instead of using the controlled vocabulary e.g. with
-                                                        <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.theme">Dataset
-                                                            theme</a>, with which the <a
-                                                            href="https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/data-theme">Data Theme
-                                                            Vocabulary</a> MUST be used. In addition, a mapping of e.g. the Earth
-                                                        observation and environment item from the HVD vocabulary to the Environment
-                                                        item in the Data Theme vocabulary could be established by the data publisher.</li>
-                                                </ul>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        The property MUST have at least one value from the original controlled vocabulary in DCAT-AP
-                                        <ol>
-                                            <li>Use at least one value from the original controlled vocabulary with the original property</li>
-                                            <li>For additional values of the original property, use the different controlled vocabulary.</li>
-                                            <li>Consider establishing mapping with the original controlled vocabulary.</li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        The property IS RECOMMENDED to use as range values codes from the original controlled vocabulary in DCAT-AP
-                                        <ol>
-                                            <li>Use the separate controlled vocabulary with the original property</li>
-                                            <li>Consider, if, in addition to the values from the separate controlled vocabulary, values from the original
-                                                one can be used.</li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        The property MAY use as range values codes from the original controlled vocabulary in DCAT-AP
-                                        <ol>
-                                            <li>Use the separate controlled vocabulary with the original property</li>
-                                        </ol>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        A different controlled vocabulary is to be used
-                        <ul>
-                            <li>If another controlled vocabulary is to be used, then it must be used with a different
-                                property.
-                                <ul>
-                                    <li>Example: For GeoDCAT-AP 3.0.0, the <a
-                                            href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory">Classification
-                                            of spatial data services</a>
-                                        and <a
-                                            href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType">Spatial
-                                            data service type</a>
-                                        controlled vocabularies are used to classify <a
-                                            href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#DataService.servicecategory">Data
-                                            Services</a>.
-                                        New properties, <a
-                                            href="http://data.europa.eu/930/serviceCategory">http://data.europa.eu/930/serviceCategory</a>
-                                        and <a
-                                            href="http://data.europa.eu/930/serviceType">http://data.europa.eu/930/serviceType</a>,
-                                        with the respective
-                                        controlled vocabularies attached were created instead of reusing the
-                                        <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_type">Catalogued
-                                            Resource type</a> both,
-                                        as that would make validation and processing of the data more complex.
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                Ensure that the used controlled vocabulary is published according to the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#requirements-for-controlled-vocabularies">DCAT-AP requirements</a>.
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                 <h4>What to do</h4>
+
+                <section>
+                    <h5>Some items that are required in the profile are missing in the controlled vocabulary</h5>
+                    <ol>
+                        <li>
+                            <strong>Solution 1:</strong> Try to extend the existing controlled vocabulary at its
+                            source. Many of the specified controlled vocabularies are managed in <a
+                                href="https://op.europa.eu/en/web/eu-vocabularies/controlled-vocabularies">EU
+                                Vocabularies</a>,
+                            and there is a possibility to submit additional items in them. Similarly, this may be
+                            possible with other controlled vocabulary publishers.
+                            <ul>
+                                <li>Example: For GeoDCAT-AP 3.0.0, <code>AS_NEEDED</code> and
+                                    <code>NOT_PLANNED</code> items were added to the
+                                    <a href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/frequency">Frequency
+                                        controlled vocabulary</a>
+                                    that MUST be used with <a
+                                        href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.frequency">Dataset
+                                        frequency</a>.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Solution 2:</strong> If the above solution is not feasible, create a separate
+                            controlled vocabulary,
+                            and decide based on the constraints on the controlled vocabulary usage on the considered
+                            property.
+                            <ol type="a">
+                                <li>
+                                    <strong>The property MUST use the original controlled vocabulary in DCAT-AP</strong>
+                                    <ol>
+                                        <li>Create a separate property</li>
+                                        <li>Establish mapping between the overlapping items and consider generating the DCAT-AP compliant usage in
+                                            addition to the profile specific one automatically.
+                                            <ul>
+                                                <li>Example: For <a
+                                                        href="https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://data.europa.eu/bna/asd487ae75">High-value
+                                                        dataset categories</a> controlled vocabulary, a separate property, <a
+                                                        href="http://data.europa.eu/r5r/hvdCategory">http://data.europa.eu/r5r/hvdCategory</a>,
+                                                    was created in <a
+                                                        href="https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/#Dataset.HVDCategory">DCAT-AP
+                                                        HVD Dataset categories</a> instead of using the controlled vocabulary e.g. with
+                                                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.theme">Dataset
+                                                        theme</a>, with which the <a
+                                                        href="https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/data-theme">Data Theme
+                                                        Vocabulary</a> MUST be used. In addition, a mapping of e.g. the Earth
+                                                    observation and environment item from the HVD vocabulary to the Environment
+                                                    item in the Data Theme vocabulary could be established by the data publisher.
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <strong>The property MUST have at least one value from the original controlled vocabulary in DCAT-AP</strong>
+                                    <ol>
+                                        <li>Use at least one value from the original controlled vocabulary with the original property</li>
+                                        <li>For additional values of the original property, use the different controlled vocabulary.</li>
+                                        <li>Consider establishing mapping with the original controlled vocabulary.</li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <strong>The property IS RECOMMENDED to use as range values codes from the original controlled vocabulary in DCAT-AP</strong>
+                                    <ol>
+                                        <li>Use the separate controlled vocabulary with the original property</li>
+                                        <li>Consider, if, in addition to the values from the separate controlled vocabulary, values from the original
+                                            one can be used.</li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <strong>The property MAY use as range values codes from the original controlled vocabulary in DCAT-AP</strong>
+                                    <ol>
+                                        <li>Use the separate controlled vocabulary with the original property</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h5>A different controlled vocabulary is to be used</h5>
+                    <ol>
+                        <li>
+                            If another controlled vocabulary is to be used, then it must be used with a different property.
+                            <ul>
+                                <li>Example: For GeoDCAT-AP 3.0.0, the <a
+                                        href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory">Classification
+                                        of spatial data services</a>
+                                    and <a
+                                        href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType">Spatial
+                                        data service type</a>
+                                    controlled vocabularies are used to classify <a
+                                        href="https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/#DataService.servicecategory">Data
+                                        Services</a>.
+                                    New properties, <a
+                                        href="http://data.europa.eu/930/serviceCategory">http://data.europa.eu/930/serviceCategory</a>
+                                    and <a
+                                        href="http://data.europa.eu/930/serviceType">http://data.europa.eu/930/serviceType</a>,
+                                    with the respective
+                                    controlled vocabularies attached were created instead of reusing the
+                                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_type">Catalogued
+                                        Resource type</a> both,
+                                    as that would make validation and processing of the data more complex.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Ensure that the used controlled vocabulary is published according to the <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#requirements-for-controlled-vocabularies">DCAT-AP requirements</a>.
+                        </li>
+                    </ol>
+                </section>
+
             </section>
 
             <section>
