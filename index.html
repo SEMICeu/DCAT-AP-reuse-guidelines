@@ -1313,13 +1313,12 @@
             <section>
                 <h4>Explanation</h4>
                 <p>
-                    Existing DCAT-AP implementations expect values for mandatory properties and treat properties with
-                    number of values
-                    limited to 1 as such. Applications might implement simple values as simple attributes, not expect
-                    arrays in code.
+                    Existing DCAT-AP implementations expect mandatory properties to actually have values.
+                    They also treat properties with a number of values limited to 1 as such, and not expect them to have multiple values.
+                    Applications might implement simple values as simple attributes, and not expect arrays or complex objects in code.
                     SPARQL queries may not aggregate over variables which are expected to have at most one value or may
-                    expect values for
-                    mandatory properties. These may break if the constraints are violated.
+                    expect values for mandatory properties.
+                    All of these may break if the constraints are violated.
                 </p>
             </section>
         </section>
