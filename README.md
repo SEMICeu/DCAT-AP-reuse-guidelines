@@ -9,7 +9,7 @@ The HTML of this specification can be found [here](https://semiceu.github.io/DCA
 
 The latest version of DCAT-AP (3.0.1) is published [here](https://semiceu.github.io/DCAT-AP/releases/3.0.1/).
 
-The latest version of DCAT-AP Annex for High Value Datasets (SEMIC Recommendation v3.0.0) is also published [here](https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/).
+The latest draft version of DCAT-AP Annex for High Value Datasets (draft 3.0.1) may be viewed [here](https://semiceu.github.io/DCAT-AP/drafts/3.0.1-hvd).
 
 Other Relevant links:
 - [Respec](https://respec.org/docs/)
